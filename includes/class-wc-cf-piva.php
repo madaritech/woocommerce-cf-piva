@@ -175,15 +175,17 @@ class Wc_Cf_Piva
         //$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         //$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
-        $this->loader->add_action('woocommerce_after_order_notes', $plugin_public, 'wc_cf_piva_js_checkout_field');
-        $this->loader->add_action('woocommerce_checkout_process', $plugin_public, 'wc_cf_piva_checkout_field_validation');
+        $this->loader->add_action('woocommerce_after_order_notes', $plugin_public, 'wc_cf_piva_js_show_hide_fields');
+        $this->loader->add_action('woocommerce_before_edit_account_address_form', $plugin_public, 'wc_cf_piva_js_show_hide_fields');
+        $this->loader->add_action('woocommerce_checkout_process', $plugin_public, 'wc_cf_piva_fields_validation');
+        $this->loader->add_action('woocommerce_after_save_address_validation', $plugin_public, 'wc_cf_piva_fields_validation');
         $this->loader->add_action('woocommerce_checkout_update_order_meta', $plugin_public, 'wc_cf_piva_checkout_field_update_order_meta');
         $this->loader->add_action('woocommerce_checkout_update_user_meta', $plugin_public, 'wc_cf_piva_checkout_field_update_user_meta');
 
         $this->loader->add_filter('woocommerce_billing_fields', $plugin_public, 'wc_cf_piva_billing_fields');
         $this->loader->add_filter('woocommerce_order_formatted_billing_address', $plugin_public, 'wc_cf_piva_formatted_billing_address', 10, 2);
         $this->loader->add_filter('woocommerce_my_account_my_address_formatted_address', $plugin_public, 'wc_cf_piva_my_account_my_address_formatted_address', 10, 3);
-        //$this->loader->add_filter('woocommerce_address_to_edit', $plugin_public, 'wc_cf_piva_address_to_edit');
+        $this->loader->add_filter('woocommerce_address_to_edit', $plugin_public, 'wc_cf_piva_address_to_edit');
         $this->loader->add_filter('woocommerce_formatted_address_replacements', $plugin_public, 'wc_cf_piva_formatted_address_replacements', 10, 2);
         $this->loader->add_filter('woocommerce_localisation_address_formats', $plugin_public, 'wc_cf_piva_localisation_address_format');
     }

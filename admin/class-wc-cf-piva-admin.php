@@ -94,7 +94,7 @@ class Wc_Cf_Piva_Admin
 
         $fields['billing']['fields']['billing_ricfatt'] = array(
                                                             'type'        => 'select',
-                                                            'label'       => __('Tipo Emissione', 'wc_cf_piva'),
+                                                            'label'       => __('Tipo Emissione Richiesta', 'wc_cf_piva'),
                                                             'description' => 'Tipo di ricevuta per il cliente',
                                                             'options'   => array(
                                                                                     'ricevuta' => 'Ricevuta',
@@ -121,7 +121,7 @@ class Wc_Cf_Piva_Admin
         );
 
         $fields['ricfatt'] = array(
-            'label' => __('Tipo Emissione', 'wc_cf_piva'),
+            'label' => __('Tipo Emissione Richiesta', 'wc_cf_piva'),
             'show'  => true
         );
 

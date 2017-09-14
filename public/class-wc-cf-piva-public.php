@@ -96,18 +96,18 @@ class Wc_Cf_Piva_Public
      * @since    1.0.0
      * @access   public
      */
-    public function wc_cf_piva_js_checkout_field()
+    public function wc_cf_piva_js_show_hide_fields()
     {
-        wp_enqueue_script('select_add_cf_piva_field', plugin_dir_url(__FILE__) . 'js/wc-cf-piva-public.js', array( 'jquery' ), $this->version, true);
+        wp_enqueue_script('select_show_hide_cf_piva_field', plugin_dir_url(__FILE__) . 'js/wc-cf-piva-public.js', array( 'jquery' ), $this->version, true);
     }
 
     /**
-    * Creating custom validator for cf/piva field
+    * Creating custom validator for cf/piva field in the address section of the customer account page, or in the checkout page of WooCommerce
     *
     * @since    1.0.0
     * @access   public
     */
-    public function wc_cf_piva_checkout_field_validation()
+    public function wc_cf_piva_fields_validation()
     {
         global $WC_Checkout;
         if (!empty($_POST['billing_ricfatt']) and $_POST['billing_ricfatt'] == 'fattura') {
@@ -198,18 +198,21 @@ class Wc_Cf_Piva_Public
     * @param    string $type Type of fields (billing or shipping)
     * @return   object $fields Billing fields
     **/
-/*    public function wc_cf_piva_address_to_edit($address)
+    public function wc_cf_piva_address_to_edit($address)
     {
         global $wp_query;
 
         if (isset($wp_query->query_vars['edit-address']) && $wp_query->query_vars['edit-address'] != 'fatturazione') {
             /*** Se non siamo in modifica non fare nulla ***/
-/*            return $address;
+            return $address;
         }
+
+        //js to show the field on select change
+        /*wp_enqueue_script('select_add_cf_piva_field', plugin_dir_url(__FILE__) . 'js/wc-cf-piva-public.js', array( 'jquery' ), $this->version, true);*/
 
         /*** Per la parte di modifica ***/
 
-/*        if (! isset($address['billing_cfpiva'])) {
+        if (! isset($address['billing_cfpiva'])) {
             $address['billing_cfpiva'] = array(
                 'label'       => __('CF o PIVA', 'wp_cf_piva'),
                 'placeholder' => _x('CF o PIVA', 'placeholder', 'wp_cf_piva'),
@@ -232,7 +235,7 @@ class Wc_Cf_Piva_Public
 
         return $address;
     }
-*/
+
     /**
     * WooCommerce profile page, address static section
     *
@@ -246,12 +249,13 @@ class Wc_Cf_Piva_Public
     public function wc_cf_piva_formatted_address_replacements($address, $args)
     {
         $address['{cfpiva}'] = '';
+        $address['{ricfatt}'] = '';
 
         $user = wp_get_current_user();
 
         if (in_array('customer', (array) $user->roles)) {
             //$address['{ssn}'] = '';
-            if (!empty($args['cfpiva'])) {
+            if (!empty($args['cfpiva']) && !empty($args['ricfatt']) && $args['ricfatt']=='fattura') {
                 $address['{cfpiva}'] = __('CF o PIVA', 'wc_cf_piva') . ' ' . $args['cfpiva'];
             }
         }
