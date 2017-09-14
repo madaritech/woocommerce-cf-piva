@@ -156,6 +156,8 @@ class Wc_Cf_Piva
 
         //$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         //$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+
+        $this->loader->add_action('admin_notices', $plugin_admin, 'language_admin_notice');
         
         $this->loader->add_filter('woocommerce_admin_billing_fields', $plugin_admin, 'wc_cf_piva_admin_billing_fields');
         $this->loader->add_filter('woocommerce_customer_meta_fields', $plugin_admin, 'wc_cf_piva_customer_meta_fields');

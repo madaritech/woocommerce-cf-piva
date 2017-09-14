@@ -129,6 +129,25 @@ class Wc_Cf_Piva_Admin
     }
 
     /**
+     * Chek that tha language i ìs italian for WordPress notice.
+     *
+     * @since  1.0.0
+     * @access public
+     */
+    public function language_admin_notice()
+    {
+        if (get_locale() != 'it_IT') :
+    ?>
+    
+    <div class="notice error is-dismissible" >
+        <p><?php _e('<strong>WooCommerce CF PIVA</strong> needs italian language set in WordPress. Set it now! ', 'wc_cf_piva'); ?></p>
+    </div>
+    
+    <?php 
+        endif;
+    }
+
+    /**
      * Register the JavaScript for the admin area.
      *
      * @since    1.0.0
