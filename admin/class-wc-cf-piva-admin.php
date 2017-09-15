@@ -88,8 +88,8 @@ class Wc_Cf_Piva_Admin
                                                             'label'       => __('Tipo Emissione Richiesta', 'wc_cf_piva'),
                                                             'description' => 'Tipo di ricevuta per il cliente',
                                                             'options'   => array(
-                                                                                    'ricevuta' => 'Ricevuta',
-                                                                                    'fattura' => 'Fattura'
+                                                                                    'RICEVUTA' => 'Ricevuta',
+                                                                                    'FATTURA' => 'Fattura'
                                                                             )
                                                         );
         

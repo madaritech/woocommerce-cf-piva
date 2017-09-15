@@ -70,7 +70,7 @@ class Wc_Cf_Piva_Public
      * @since    1.0.0
      * @access   public
      * @param    array $fields WooCommerce fields
-     * @return   array $fields Billing fields
+     * @return   array $fields Billing cubrid_field_seek(result)
      */
     
     public function wc_cf_piva_billing_fields($fields)
@@ -87,8 +87,8 @@ class Wc_Cf_Piva_Public
             'clear'     => true,
             'priority'  => 8,
             'options'   => array(
-                'ricevuta' => 'Ricevuta',
-                'fattura' => 'Fattura'
+                'RICEVUTA' => 'Ricevuta',
+                'FATTURA' => 'Fattura'
             )
         );
 
@@ -116,7 +116,15 @@ class Wc_Cf_Piva_Public
      */
     public function wc_cf_piva_js_show_hide_fields()
     {
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Enqueueing js for show/hide CF PIVA field...");
+        }
+
         wp_enqueue_script('select_show_hide_cf_piva_field', plugin_dir_url(__FILE__) . 'js/wc-cf-piva-public.js', array( 'jquery' ), $this->version, true);
+
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Enqueued js for show/hide CF PIVA field...");
+        }
     }
 
     /**
@@ -132,9 +140,38 @@ class Wc_Cf_Piva_Public
         }
 
         global $WC_Checkout;
-        if (!empty($_POST['billing_ricfatt']) and $_POST['billing_ricfatt'] == 'fattura') {
-            if (!$_POST['billing_cfpiva']) {
-                wc_add_notice('<strong>'.__('Codice Fiscale o Partita IVA').'</strong> '.__(' è un campo obbligatorio.'), 'error');
+
+        $message = '';
+
+        if (!empty($_POST['billing_ricfatt']) and $_POST['billing_ricfatt'] == 'FATTURA') {
+            if (isset($_POST['billing_cfpiva']) && !empty($_POST['billing_cfpiva'])) {
+                $cfpiva = sanitize_text_field(esc_attr($_POST['billing_cfpiva']));
+                
+                switch (strlen($cfpiva)) {
+                    case 16:
+                        $codice_fiscale = new Wc_Cf_Piva_Codice_Fiscale($cfpiva);
+                        $codice_fiscale_ok = $codice_fiscale->verify();
+                        if (!$codice_fiscale_ok) {
+                            $message = __(' ha un formato non valido.', 'wc_cf_piva');
+                        }
+                        break;
+                    case 11:
+                        $partita_iva = new Wc_Cf_Piva_Partita_Iva($cfpiva);
+                        $partita_iva_ok = $partita_iva->verify();
+                        if (!$partita_iva_ok) {
+                            $message = __(' ha un formato non valido.', 'wc_cf_piva');
+                        }
+                        break;
+                    default:
+                        $message = __(' ha un formato non valido.', 'wc_cf_piva');
+                        break;
+                }
+            } else {
+                $message = __(' è un campo obbligatorio.', 'wc_cf_piva');
+            }
+
+            if (!empty($message)) {
+                wc_add_notice('<strong>'.__('Codice Fiscale o Partita IVA').'</strong> '.$message, 'error');
             }
         }
 
@@ -331,7 +368,7 @@ class Wc_Cf_Piva_Public
 
         if (in_array('customer', (array) $user->roles)) {
             //$address['{ssn}'] = '';
-            if (!empty($args['cfpiva']) && !empty($args['ricfatt']) && $args['ricfatt']=='fattura') {
+            if (!empty($args['cfpiva']) && !empty($args['ricfatt']) && $args['ricfatt']=='FATTURA') {
                 $address['{cfpiva}'] = __('CF o PIVA', 'wc_cf_piva') . ' ' . $args['cfpiva'];
             }
         }
