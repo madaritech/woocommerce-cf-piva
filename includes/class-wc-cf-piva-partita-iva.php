@@ -63,6 +63,12 @@ class Wc_Cf_Piva_Partita_Iva
      */
     public function verify()
     {
-        return true;
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Verifying Partita Iva [ partita iva :: $this->codice_fiscale ]...");
+        }
+
+        if (!empty($this->partita_iva) && strlen($this->partita_iva) == 11) {
+            return is_numeric($this->partita_iva);
+        }
     }
 }

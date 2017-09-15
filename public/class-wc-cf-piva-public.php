@@ -41,6 +41,15 @@ class Wc_Cf_Piva_Public
      */
     private $version;
 
+    /*
+    * A {@link Wc_Cf_Piva_Log_Service} instance.
+    *
+    * @since 1.0.0
+    * @access private
+    * @var \Wc_Cf_Piva_Log_Service $log A {@link Wc_Cf_Piva_Log_Service} instance.
+    */
+    private $log;
+
     /**
      * Initialize the class and set its properties.
      *
@@ -50,12 +59,13 @@ class Wc_Cf_Piva_Public
      */
     public function __construct($plugin_name, $version)
     {
+        $this->log = Wc_Cf_Piva_Log_Service::create('Wc_Cf_Piva_Public');
         $this->plugin_name = $plugin_name;
         $this->version = $version;
     }
 
     /**
-     * Adding select e test field for choose cd/piva.
+     * Adding selects and text fields for choose cd/piva.
      *
      * @since    1.0.0
      * @access   public
@@ -65,6 +75,10 @@ class Wc_Cf_Piva_Public
     
     public function wc_cf_piva_billing_fields($fields)
     {
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Adding select and text fields [ fields :: " . var_export($fields, true) . " ]...");
+        }
+
         $fields['billing_ricfatt'] = array(
             'type'      => 'select',
             'label'     => __('Ricevuta Fiscale o Fattura', 'wp_cf_piva'),
@@ -87,11 +101,15 @@ class Wc_Cf_Piva_Public
             'priority'      => 21,
         );
 
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Select and text fields added [ fields :: " . var_export($fields, true) . " ]...");
+        }
+
         return $fields;
     }
 
     /**
-     * Adding select e test field for choose cd/piva.
+     * Enqueue js for show/hide CF PIVA field.
      *
      * @since    1.0.0
      * @access   public
@@ -109,11 +127,19 @@ class Wc_Cf_Piva_Public
     */
     public function wc_cf_piva_fields_validation()
     {
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Validating CF PIVA field...");
+        }
+
         global $WC_Checkout;
         if (!empty($_POST['billing_ricfatt']) and $_POST['billing_ricfatt'] == 'fattura') {
             if (!$_POST['billing_cfpiva']) {
                 wc_add_notice('<strong>'.__('Codice Fiscale o Partita IVA').'</strong> '.__(' è un campo obbligatorio.'), 'error');
             }
+        }
+
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Validated CF PIVA field...");
         }
     }
 
@@ -126,11 +152,24 @@ class Wc_Cf_Piva_Public
     */
     public function wc_cf_piva_checkout_field_update_order_meta($order_id)
     {
-        if ($_POST['billing_ricfatt']) {
-            update_post_meta($order_id, 'billing_ricfatt', sanitize_text_field(esc_attr($_POST['billing_ricfatt'])));
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Update order meta with CF PIVA and type fields value [ order_id :: $order_id ]...");
         }
-        if ($_POST['billing_cfpiva']) {
-            update_post_meta($order_id, 'billing_cfpiva', sanitize_text_field(esc_attr($_POST['billing_cfpiva'])));
+
+        $ricfatt = '';
+        $cfpiva = '';
+
+        if (isset($_POST['billing_ricfatt'])) {
+            $ricfatt = sanitize_text_field(esc_attr($_POST['billing_ricfatt']));
+            update_post_meta($order_id, 'billing_ricfatt', $ricfatt);
+        }
+        if (isset($_POST['billing_cfpiva'])) {
+            $cfpiva = sanitize_text_field(esc_attr($_POST['billing_cfpiva']));
+            update_post_meta($order_id, 'billing_cfpiva', $cfpiva);
+        }
+
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Order meta updated with CF PIVA field value [ ricfatt :: $ricfatt ][ cfpiva :: $cfpiva ]...");
         }
     }
 
@@ -143,11 +182,24 @@ class Wc_Cf_Piva_Public
     **/
     public function wc_cf_piva_checkout_field_update_user_meta($user_id)
     {
-        if ($user_id && $_POST['billing_ricfatt']) {
-            update_user_meta($user_id, 'billing_ricfatt', sanitize_text_field(esc_attr($_POST['billing_ricfatt'])));
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Update user meta with CF PIVA and type fields value [ user_id :: $user_id ]...");
         }
-        if ($user_id && $_POST['billing_cfpiva']) {
-            update_user_meta($user_id, 'billing_cfpiva', sanitize_text_field(esc_attr($_POST['billing_cfpiva'])));
+
+        $ricfatt = '';
+        $cfpiva = '';
+
+        if ($user_id && isset($_POST['billing_ricfatt'])) {
+            $ricfatt =sanitize_text_field(esc_attr($_POST['billing_ricfatt']));
+            update_user_meta($user_id, 'billing_ricfatt', $ricfatt);
+        }
+        if ($user_id && isset($_POST['billing_cfpiva'])) {
+            $cfpiva = sanitize_text_field(esc_attr($_POST['billing_cfpiva']));
+            update_user_meta($user_id, 'billing_cfpiva', $cfpiva);
+        }
+
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("User meta updated with CF PIVA and type fields value [ ricfatt :: $ricfatt ][ cfpiva :: $cfpiva ]...");
         }
     }
 
@@ -162,8 +214,16 @@ class Wc_Cf_Piva_Public
     **/
     public function wc_cf_piva_formatted_billing_address($fields, $order)
     {
-        $fields['cfpiva'] = get_post_meta($order->get_id(), '_billing_cfpiva', true);  //$order->billing_vat;
-        $fields['ricfatt'] = get_post_meta($order->get_id(), '_billing_ricfatt', true);  //$order->billing_ssn;
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Updating CF PIVA and type fields value from order [ fields :: " . var_export($fields, true) . " ][ order :: " . var_export($order, true) . " ]...");
+        }
+        
+        $fields['cfpiva'] = get_post_meta($order->get_id(), '_billing_cfpiva', true);
+        $fields['ricfatt'] = get_post_meta($order->get_id(), '_billing_ricfatt', true);
+
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Updated CF PIVA and type fields value from order [ cfpiva :: ".$fields['cfpiva']." ][ ricfatt :: ".$fields['ricfatt']." ]...");
+        }
 
         return $fields;
     }
@@ -180,9 +240,17 @@ class Wc_Cf_Piva_Public
     **/
     public function wc_cf_piva_my_account_my_address_formatted_address($fields, $customer_id, $type)
     {
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Updating CF PIVA and type fields value from user meta [ fields :: " . var_export($fields, true) . " ][ customer_id ::  $customer_id ][ type ::  $type ]...");
+        }
+
         if ($type == 'billing') {
             $fields['cfpiva'] = get_user_meta($customer_id, 'billing_cfpiva', true);
             $fields['ricfatt'] = get_user_meta($customer_id, 'billing_ricfatt', true);
+        }
+
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Updated CF PIVA and type fields value from user meta [ fields :: " . var_export($fields, true) . " ]...");
         }
 
         return $fields;
@@ -200,6 +268,10 @@ class Wc_Cf_Piva_Public
     **/
     public function wc_cf_piva_address_to_edit($address)
     {
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Updating CF PIVA and type address fields value from user meta [ address :: " . var_export($address, true) . " ]...");
+        }
+
         global $wp_query;
 
         if (isset($wp_query->query_vars['edit-address']) && $wp_query->query_vars['edit-address'] != 'fatturazione') {
@@ -229,6 +301,10 @@ class Wc_Cf_Piva_Public
             );
         }
 
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Updated CF PIVA and type address fields value from user meta [ address['billing_cfpiva'] :: ".var_export($address['billing_cfpiva'], true)." ][ address['billing_ricfatt'] :: ".var_export($address['billing_ricfatt'], true)." ]...");
+        }
+
         return $address;
     }
 
@@ -244,6 +320,10 @@ class Wc_Cf_Piva_Public
     **/
     public function wc_cf_piva_formatted_address_replacements($address, $args)
     {
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Updating CF PIVA and type address fields value in WooCommerce profile page [ address :: " . var_export($address, true) . " ][ args :: " . var_export($args, true) . " ]...");
+        }
+
         $address['{cfpiva}'] = '';
         $address['{ricfatt}'] = '';
 
@@ -256,9 +336,9 @@ class Wc_Cf_Piva_Public
             }
         }
 
-        /*if ( !empty( $args['ssn'] ) ) {
-            $address['{ssn}'] = __( 'SSN', 'your-domain' ) . ' ' . strtoupper( $args['ssn'] );
-        }*/
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Updated CF PIVA and type address fields value in WooCommerce profile page [ address :: " . var_export($address, true) . " ]...");
+        }
 
         return $address;
     }
@@ -271,10 +351,18 @@ class Wc_Cf_Piva_Public
     * @param    object $formats
     * @return   object $formats
     **/
-    public function wc_cf_piva_localisation_address_format($formats)
+    public function wc_cf_piva_localization_address_format($formats)
     {
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Mapping the keys in the address section of WooCommerce user profile, based on the country code [ formats :: " . var_export($formats, true) . " ]...");
+        }
+
         //$formats['IT'] .= "\n\n{vat}\n{ssn}";
         $formats['IT'] .= "\n\n{cfpiva}";
+
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Key mapped [ formats['IT'] :: formats['IT'] ]...");
+        }
 
         return $formats;
     }

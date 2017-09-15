@@ -63,5 +63,12 @@ class Wc_Cf_Piva_Codice_Fiscale
      */
     public function verify()
     {
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Verifying Codice Fiscale [ codice_fiscale :: $this->codice_fiscale ]...");
+        }
+
+        if (!empty($this->codice_fiscale) && strlen($this->codice_fiscale) == 16) {
+            return ctype_alnum($this->codice_fiscale);
+        }
     }
 }

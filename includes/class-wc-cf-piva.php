@@ -105,6 +105,12 @@ class Wc_Cf_Piva
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wc-cf-piva-log-service.php';
+
+        /**
+         * The class responsible for orchestrating the actions and filters of the
+         * core plugin.
+         */
         require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wc-cf-piva-loader.php';
 
         /**
@@ -164,9 +170,6 @@ class Wc_Cf_Piva
     {
         $plugin_admin = new Wc_Cf_Piva_Admin($this->get_plugin_name(), $this->get_version());
 
-        //$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
-        //$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
-
         $this->loader->add_action('admin_notices', $plugin_admin, 'language_admin_notice');
         
         $this->loader->add_filter('woocommerce_admin_billing_fields', $plugin_admin, 'wc_cf_piva_admin_billing_fields');
@@ -196,7 +199,7 @@ class Wc_Cf_Piva
         $this->loader->add_filter('woocommerce_my_account_my_address_formatted_address', $plugin_public, 'wc_cf_piva_my_account_my_address_formatted_address', 10, 3);
         $this->loader->add_filter('woocommerce_address_to_edit', $plugin_public, 'wc_cf_piva_address_to_edit');
         $this->loader->add_filter('woocommerce_formatted_address_replacements', $plugin_public, 'wc_cf_piva_formatted_address_replacements', 10, 2);
-        $this->loader->add_filter('woocommerce_localisation_address_formats', $plugin_public, 'wc_cf_piva_localisation_address_format');
+        $this->loader->add_filter('woocommerce_localisation_address_formats', $plugin_public, 'wc_cf_piva_localization_address_format');
     }
 
     /**

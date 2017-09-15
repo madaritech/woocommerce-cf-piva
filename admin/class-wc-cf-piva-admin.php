@@ -41,6 +41,15 @@ class Wc_Cf_Piva_Admin
      */
     private $version;
 
+    /*
+    * A {@link Wc_Cf_Piva_Log_Service} instance.
+    *
+    * @since 1.0.0
+    * @access private
+    * @var \Wc_Cf_Piva_Log_Service $log A {@link Wc_Cf_Piva_Log_Service} instance.
+    */
+    private $log;
+
     /**
      * Initialize the class and set its properties.
      *
@@ -50,31 +59,9 @@ class Wc_Cf_Piva_Admin
      */
     public function __construct($plugin_name, $version)
     {
+        $this->log = Wc_Cf_Piva_Log_Service::create('Wc_Cf_Piva_Admin');
         $this->plugin_name = $plugin_name;
         $this->version = $version;
-    }
-
-    /**
-     * Register the stylesheets for the admin area.
-     *
-     * @since    1.0.0
-     */
-    public function enqueue_styles()
-    {
-
-        /**
-         * This function is provided for demonstration purposes only.
-         *
-         * An instance of this class should be passed to the run() function
-         * defined in Wc_Cf_Piva_Loader as all of the hooks are defined
-         * in that particular class.
-         *
-         * The Wc_Cf_Piva_Loader will then create the relationship
-         * between the defined hooks and the functions defined in this
-         * class.
-         */
-
-        //wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/wc-cf-piva-admin.css', array(), $this->version, 'all');
     }
 
     /**
@@ -123,6 +110,10 @@ class Wc_Cf_Piva_Admin
     **/
     public function wc_cf_piva_admin_billing_fields($fields)
     {
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Setting labels [ fields :: " . var_export($fields, true) . " ]...");
+        }
+        
         $fields['cfpiva'] = array(
             'label' => __('CF o Partita Iva', 'wc_cf_piva'),
             'show'  => true
@@ -132,6 +123,10 @@ class Wc_Cf_Piva_Admin
             'label' => __('Tipo Emissione Richiesta', 'wc_cf_piva'),
             'show'  => true
         );
+
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Labels set [ fields :: " . var_export($fields, true) . " ]...");
+        }
 
         return $fields;
     }
@@ -144,7 +139,12 @@ class Wc_Cf_Piva_Admin
      */
     public function language_admin_notice()
     {
-        if (get_locale() != 'it_IT') :
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Language check...");
+        }
+        $lang = get_locale();
+        
+        if ($lang != 'it_IT') :
     ?>
     
     <div class="notice error is-dismissible" >
@@ -153,5 +153,9 @@ class Wc_Cf_Piva_Admin
     
     <?php
         endif;
+
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Language checked [ lang :: $lang ]...");
+        }
     }
 }
