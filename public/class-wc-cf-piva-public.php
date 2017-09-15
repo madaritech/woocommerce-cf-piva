@@ -207,11 +207,7 @@ class Wc_Cf_Piva_Public
             return $address;
         }
 
-        //js to show the field on select change
-        /*wp_enqueue_script('select_add_cf_piva_field', plugin_dir_url(__FILE__) . 'js/wc-cf-piva-public.js', array( 'jquery' ), $this->version, true);*/
-
         /*** Per la parte di modifica ***/
-
         if (! isset($address['billing_cfpiva'])) {
             $address['billing_cfpiva'] = array(
                 'label'       => __('CF o PIVA', 'wp_cf_piva'),
@@ -282,51 +278,4 @@ class Wc_Cf_Piva_Public
 
         return $formats;
     }
-
-    /**
-     * Register the stylesheets for the public-facing side of the site.
-     *
-     * @since    1.0.0
-     */
-    /*public function enqueue_styles() {
-
-        /**
-         * This function is provided for demonstration purposes only.
-         *
-         * An instance of this class should be passed to the run() function
-         * defined in Wc_Cf_Piva_Loader as all of the hooks are defined
-         * in that particular class.
-         *
-         * The Wc_Cf_Piva_Loader will then create the relationship
-         * between the defined hooks and the functions defined in this
-         * class.
-         */
-/*
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wc-cf-piva-public.css', array(), $this->version, 'all' );
-
-    }
-*/
-    /**
-     * Register the JavaScript for the public-facing side of the site.
-     *
-     * @since    1.0.0
-     */
-/*	public function enqueue_scripts() {
-
-        /**
-         * This function is provided for demonstration purposes only.
-         *
-         * An instance of this class should be passed to the run() function
-         * defined in Wc_Cf_Piva_Loader as all of the hooks are defined
-         * in that particular class.
-         *
-         * The Wc_Cf_Piva_Loader will then create the relationship
-         * between the defined hooks and the functions defined in this
-         * class.
-         */
-/*
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wc-cf-piva-public.js', array( 'jquery' ), $this->version, false );
-
-    }
-*/
 }

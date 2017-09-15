@@ -114,6 +114,16 @@ class Wc_Cf_Piva
         require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wc-cf-piva-i18n.php';
 
         /**
+         * The class responsible for defining functionality of the Partita Iva.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wc-cf-piva-partita-iva.php';
+
+        /**
+         * The class responsible for defining functionality of the Codice Fiscale.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wc-cf-piva-codice-fiscale.php';
+
+        /**
          * The class responsible for defining all actions that occur in the admin area.
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-wc-cf-piva-admin.php';
@@ -173,9 +183,6 @@ class Wc_Cf_Piva
     private function define_public_hooks()
     {
         $plugin_public = new Wc_Cf_Piva_Public($this->get_plugin_name(), $this->get_version());
-
-        //$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
-        //$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
         $this->loader->add_action('woocommerce_after_order_notes', $plugin_public, 'wc_cf_piva_js_show_hide_fields');
         $this->loader->add_action('woocommerce_before_edit_account_address_form', $plugin_public, 'wc_cf_piva_js_show_hide_fields');

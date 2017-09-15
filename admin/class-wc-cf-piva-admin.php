@@ -74,7 +74,7 @@ class Wc_Cf_Piva_Admin
          * class.
          */
 
-        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/wc-cf-piva-admin.css', array(), $this->version, 'all');
+        //wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/wc-cf-piva-admin.css', array(), $this->version, 'all');
     }
 
     /**
@@ -87,6 +87,10 @@ class Wc_Cf_Piva_Admin
     **/
     public function wc_cf_piva_customer_meta_fields($fields)
     {
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Setting customer meta fields [ fields :: " . var_export($fields, true) . " ]...");
+        }
+
         $fields['billing']['fields']['billing_cfpiva'] = array(
                                                             'label'       => __('CF o PIVA', 'wc_cf_piva'),
                                                             'description' => 'Partita Iva o Codice Fiscale associato'
@@ -101,7 +105,11 @@ class Wc_Cf_Piva_Admin
                                                                                     'fattura' => 'Fattura'
                                                                             )
                                                         );
-
+        
+        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+            $this->log->debug("Set customer meta fields [ fields :: " . var_export($fields, true) . " ]...");
+        }
+        
         return $fields;
     }
 
@@ -143,31 +151,7 @@ class Wc_Cf_Piva_Admin
         <p><?php _e('<strong>WooCommerce CF PIVA</strong> needs italian language set in WordPress. Set it now! ', 'wc_cf_piva'); ?></p>
     </div>
     
-    <?php 
+    <?php
         endif;
     }
-
-    /**
-     * Register the JavaScript for the admin area.
-     *
-     * @since    1.0.0
-     */
-/*	public function enqueue_scripts() {
-
-        /**
-         * This function is provided for demonstration purposes only.
-         *
-         * An instance of this class should be passed to the run() function
-         * defined in Wc_Cf_Piva_Loader as all of the hooks are defined
-         * in that particular class.
-         *
-         * The Wc_Cf_Piva_Loader will then create the relationship
-         * between the defined hooks and the functions defined in this
-         * class.
-         */
-
-/*		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wc-cf-piva-admin.js', array( 'jquery' ), $this->version, false );
-
-    }
-*/
 }
