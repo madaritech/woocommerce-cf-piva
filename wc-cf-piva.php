@@ -12,7 +12,7 @@
  * @since             1.0.0
  * @package           Wc_Cf_Piva
  *
- * @wordpress-plugin
+ * @woocommerce-cf-piva
  * Plugin Name:       WooCommerce CF PIVA
  * Plugin URI:        http://www.madaritech.com/wc-cf-piva
  * Description:       Add the "Partita IVA" e "Codice Fiscale" fields in WooCommerce for the italian market.
