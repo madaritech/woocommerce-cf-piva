@@ -76,7 +76,8 @@ class Wc_Cf_Piva_Admin
             'WC CF PIva',
             'manage_options',
             'wc-cf-piva',
-            array(&$this, 'wc_cf_piva_settings_page')
+            array(&$this, 'wc_cf_piva_settings_page'),
+            plugins_url('/images/menu-icon-16x16.jpg', __FILE__)
         );
     }
 

@@ -17,7 +17,7 @@
 <table>
     <tr>
         <td>
-            <img src="<?php echo plugins_url('../images/logo_synchro_mailchimp.png', __FILE__); ?>" alt="WooCommerce Easy Codice Fiscale Partita Iva" height="120px">
+            <img src="<?php echo plugins_url('../images/icon-128x128.jpg', __FILE__); ?>" alt="WooCommerce Easy Codice Fiscale Partita Iva" height="120px">
         </td>
         <td>
             <div style="font-size: 30px; font-weight: bold; margin-bottom: 10px; color: black;">&nbsp;<?php esc_attr_e('WooCommerce Easy Codice Fiscale Partita Iva', 'wc_cf_piva'); ?></div>
@@ -47,25 +47,22 @@
 
 						<div class="postbox">
 
-							<h2><span><?php esc_attr_e('Main Content Header', 'WpAdminStyle'); ?></span></h2>
+							<h2><span><?php esc_attr_e('Configura le etichette dei campi che verranno visualizzati', 'wc_cf_piva'); ?></span></h2>
 
 							<div class="inside">
-								<p><?php esc_attr_e(
-                                        'WordPress started in 2003 with a single bit of code to enhance the typography of everyday writing and with fewer users than you can count on your fingers and toes. Since then it has grown to be the largest self-hosted blogging tool in the world, used on millions of sites and seen by tens of millions of people every day.',
-                                        'wc_cf_piva'
-                                    ); ?></p>
-	                                
-	                                <input type="text" value="Ricevuta Fiscale o Fattura" class="regular-text" /><span class="description"><?php esc_attr_e('Visualizzato nel front-end per la selezione del tipo di dettaglio di fatturazione desiderato', 'wc_cf_piva'); ?></span><br><br>
-	                                
-	                                <input type="text" value="Codice Fiscale o Partita IVA" class="regular-text" /><span class="description"><?php esc_attr_e('Visualizzato nel front-end per l\'inserimento del Codice Fiscale o della Partita Iva', 'wc_cf_piva'); ?></span><br><br>
-	                                
-	                                <input type="text" value="CF o Partita Iva:" class="regular-text" /><span class="description"><?php esc_attr_e('Visualizzato nell\'ordine nel back-end per comunicare il Codice Fiscale o la Partita Iva inserita dal cliente', 'wc_cf_piva'); ?></span><br><br>
-	                                
-	                                <input type="text" value="Tipo Emissione Richiesta:" class="regular-text" /><span class="description"><?php esc_attr_e('Visualizzato nell\'ordine nel back-end per comunicare il tipo di dettaglio di fatturazione richiesto dal cliente', 'wc_cf_piva'); ?></span><br><br>
-	                                
-	                                <input type="text" value="CF o PIVA" class="regular-text" /><span class="description"><?php esc_attr_e('Nome dal campo per la pagina di modifica dell\'utente di WordPress', 'wc_cf_piva'); ?></span><br><br>
-	                                
-	                                <input type="text" value="CF o PIVA" class="regular-text" /><span class="description"><?php esc_attr_e('Nome dal campo per la pagina di profilo del cliente sul front-end', 'wc_cf_piva'); ?></span><br><br>
+								<p><?php esc_attr_e('Se si desidera modificare i valori di default delle etichette per ciascun campo, utilizzare i campi qui sotto riportati', 'wc_cf_piva'); ?>:</p>
+
+                                <input type="text" placeholder="Ricevuta Fiscale o Fattura" value="Ricevuta Fiscale o Fattura" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end, al checkout, per la selezione del tipo di dettaglio di fatturazione desiderato', 'wc_cf_piva'); ?></span><br><br>
+                                
+                                <input type="text" placeholder="Codice Fiscale o Partita IVA" value="Codice Fiscale o Partita IVA" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end, al checkout, per l\'inserimento del Codice Fiscale o della Partita Iva', 'wc_cf_piva'); ?></span><br><br>
+                                
+                                <input type="text" placeholder="CF o PIVA" value="CF o PIVA" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end,  nella pagina di profilo del cliente', 'wc_cf_piva'); ?></span><br><br>
+
+                                <input type="text" placeholder="CF o Partita Iva" value="CF o Partita Iva" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il Codice Fiscale o la Partita Iva inserita dal cliente', 'wc_cf_piva'); ?></span><br><br>
+                                
+                                <input type="text" placeholder="Tipo Emissione Richiesta" value="Tipo Emissione Richiesta" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il tipo di dettaglio di fatturazione richiesto dal cliente', 'wc_cf_piva'); ?></span><br><br>
+                                
+                                <input type="text" placeholder="CF o PIVA" value="CF o PIVA" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'wc_cf_piva'); ?></span><br><br>
 							</div>
 							<!-- .inside -->
 
@@ -86,14 +83,49 @@
 				<div class="meta-box-sortables">
 
 					<div class="postbox">
-
 						<h2 class="hndle"><span><?php esc_attr_e(
-                                    'Want to contribute?',
+                                    'Istruzioni',
                                         'wc_cf_piva'
                                 ); ?></span></h2>
 
 						<div class="inside">
-						    <p><?php esc_attr_e('This plugin is completely free. Help me to improve it and release new updated versions. If you have requests for features or bug fixing leave a message: ', 'wc_cf_piva'); ?><a href="http://www.madaritech.com/#menu-contact" target="_blank">Madaritech contact form</a></p>
+						 
+							<ol>
+							    <li>
+							    	<p><?php esc_attr_e('Visualizza un menu a tendina che permette al cliente di specificare il tipo di fatturazione, Ricevuta Fiscale o Fattura', 'wc_cf_piva'); ?></p>
+							    </li>
+								<li>
+                           			<p><?php esc_attr_e('Nel caso il cliente selezioni la fattura, al checkout viene aggiunto un apposito campo obbligatorio nel quale il cliente può specificare la Partita Iva o il Codice Fiscale', 'wc_cf_piva'); ?></p>
+                           		</li>
+                           		<li>
+                            		<p><?php esc_attr_e('Nel caso il cliente selezioni la fattura, nell\'ordine verrà specificata la scelta operata e il valore del Codice Fiscale e/o della Partita Iva', 'wc_cf_piva'); ?></p>
+                            	</li>
+                            </ol>
+						</div>
+						<!-- .inside -->
+					</div>
+					<!-- .postbox -->
+
+					<div class="postbox">
+
+						<h2 class="hndle"><span><?php esc_attr_e(
+                                    'Vuoi contribuire?',
+                                        'wc_cf_piva'
+                                ); ?></span></h2>
+
+						<div class="inside">
+						    <p><?php esc_attr_e('Questo plugin è completamente gratuito. Aiutami a migliorarlo con versioni sempre più aggiornate e ad implementare nuove funzionalità. Puoi contribuire con una recensione e\o una donazione. Per domande o suggerimenti puoi lasciare un messaggio nella seguente form: ', 'wc_cf_piva'); ?><a href="http://www.madaritech.com/#menu-contact" target="_blank">Madaritech contact form</a></p>
+
+						    <div align="center">
+                                <p>
+								    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+										<input type="hidden" name="cmd" value="_s-xclick">
+										<input type="hidden" name="hosted_button_id" value="9TZGG6437EUX6">
+										<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+										<img alt="" border="0" src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+									</form>
+								</p>
+							</div>
 						</div>
 						<!-- .inside -->
 
