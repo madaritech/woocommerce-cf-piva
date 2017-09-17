@@ -65,6 +65,46 @@ class Wc_Cf_Piva_Admin
     }
 
     /**
+     * The Admin Menu for the plugin.
+     *
+     * @since 1.0.0
+     */
+    public function wc_cf_piva_admin_menu()
+    {
+        add_menu_page(
+            'WooCommerce CF Piva',
+            'WC CF PIva',
+            'manage_options',
+            'wc-cf-piva',
+            array(&$this, 'wc_cf_piva_settings_page')
+        );
+    }
+
+    /**
+     * Create the Settings Page for the admin area.
+     *
+     * @since    1.0.0
+     */
+    public function wc_cf_piva_settings_page()
+    {
+        if (!current_user_can('manage_options')) {
+            wp_die(__('You do not have sufficient permissions to access this page.', 'wc_cf_piva'));
+        }
+
+        if (isset($_POST['form_submitted'])) {
+            $hidden_field = esc_html($_POST['form_submitted']);
+
+            if ($hidden_field == 'Y') {
+                update_option('wc_cf_piva_options', '');
+            }
+        }
+
+        $synchro_mailchimp_options = get_option('wc_cf_piva_options');
+            
+        require_once('partials/wc-cf-piva-admin-display.php');
+    }
+
+    /**
     * In the users setting page show the fields, but not the values
     *
     * @since    1.0.0

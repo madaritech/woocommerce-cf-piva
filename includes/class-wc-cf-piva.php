@@ -171,6 +171,7 @@ class Wc_Cf_Piva
         $plugin_admin = new Wc_Cf_Piva_Admin($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('admin_notices', $plugin_admin, 'language_admin_notice');
+        $this->loader->add_action('admin_menu', $plugin_admin, 'wc_cf_piva_admin_menu');
         
         $this->loader->add_filter('woocommerce_admin_billing_fields', $plugin_admin, 'wc_cf_piva_admin_billing_fields');
         $this->loader->add_filter('woocommerce_customer_meta_fields', $plugin_admin, 'wc_cf_piva_customer_meta_fields');
