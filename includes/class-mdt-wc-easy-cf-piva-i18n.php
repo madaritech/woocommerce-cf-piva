@@ -9,8 +9,8 @@
  * @link       http://www.madaritech.com
  * @since      1.0.0
  *
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/includes
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/includes
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/includes
  * @author     Madaritech <freelance@madaritech.com>
  */
-class Wc_Cf_Piva_i18n {
+class Mdt_Wc_Easy_Cf_Piva_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Wc_Cf_Piva_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'wc-cf-piva',
+			'mdt-wc-easy-cf-piva',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

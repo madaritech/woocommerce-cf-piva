@@ -6,8 +6,8 @@
  * @link       http://www.madaritech.com
  * @since      1.0.0
  *
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/admin
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/admin
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/admin
  * @author     Madaritech <freelance@madaritech.com>
  */
-class Wc_Cf_Piva_Admin
+class Mdt_Wc_Easy_Cf_Piva_Admin
 {
 
     /**
@@ -42,11 +42,11 @@ class Wc_Cf_Piva_Admin
     private $version;
 
     /*
-    * A {@link Wc_Cf_Piva_Log_Service} instance.
+    * A {@link Mdt_Wc_Easy_Cf_Piva_Log_Service} instance.
     *
     * @since 1.0.0
     * @access private
-    * @var \Wc_Cf_Piva_Log_Service $log A {@link Wc_Cf_Piva_Log_Service} instance.
+    * @var \Mdt_Wc_Easy_Cf_Piva_Log_Service $log A {@link Mdt_Wc_Easy_Cf_Piva_Log_Service} instance.
     */
     private $log;
 
@@ -59,7 +59,7 @@ class Wc_Cf_Piva_Admin
      */
     public function __construct($plugin_name, $version)
     {
-        $this->log = Wc_Cf_Piva_Log_Service::create('Wc_Cf_Piva_Admin');
+        $this->log = Mdt_Wc_Easy_Cf_Piva_Log_Service::create('Mdt_Wc_Easy_Cf_Piva_Admin');
         $this->plugin_name = $plugin_name;
         $this->version = $version;
     }
@@ -69,14 +69,14 @@ class Wc_Cf_Piva_Admin
      *
      * @since 1.0.0
      */
-    public function wc_cf_piva_admin_menu()
+    public function mdt_wc_easy_cf_piva_admin_menu()
     {
         add_menu_page(
             'WooCommerce CF Piva',
             'WC CF PIva',
             'manage_options',
-            'wc-cf-piva',
-            array(&$this, 'wc_cf_piva_settings_page'),
+            'mdt-wc-easy-cf-piva',
+            array(&$this, 'mdt_wc_easy_cf_piva_settings_page'),
             plugins_url('/images/menu-icon-16x16.jpg', __FILE__)
         );
     }
@@ -86,10 +86,10 @@ class Wc_Cf_Piva_Admin
      *
      * @since    1.0.0
      */
-    public function wc_cf_piva_settings_page()
+    public function mdt_wc_easy_cf_piva_settings_page()
     {
         if (!current_user_can('manage_options')) {
-            wp_die(__('You do not have sufficient permissions to access this page.', 'wc_cf_piva'));
+            wp_die(__('You do not have sufficient permissions to access this page.', 'mdt_wc_easy_cf_piva'));
         }
 
         if (isset($_POST['form_submitted'])) {
@@ -105,13 +105,13 @@ class Wc_Cf_Piva_Admin
                 $opts['settings_field']  = isset($_POST['settings_field_label']) ? sanitize_text_field($_POST['settings_field_label']) : '';
                 $opts['settings_select']  = isset($_POST['settings_select_label']) ? sanitize_text_field($_POST['settings_select_label']) : '';
 
-                update_option('wc_easy_cf_piva_options', serialize($opts));
+                update_option('mdt_wc_easy_cf_piva_options', serialize($opts));
             }
         }
 
-        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+        $opts = unserialize(get_option('mdt_wc_easy_cf_piva_options'));
             
-        require_once('partials/wc-cf-piva-admin-display.php');
+        require_once('partials/mdt-wc-easy-cf-piva-admin-display.php');
     }
 
     /**
@@ -122,23 +122,23 @@ class Wc_Cf_Piva_Admin
     * @param    object $fields Billing fields
     * @return   object $fields Billing fields
     **/
-    public function wc_cf_piva_customer_meta_fields($fields)
+    public function mdt_wc_easy_cf_piva_customer_meta_fields($fields)
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Setting customer meta fields [ fields :: " . var_export($fields, true) . " ]...");
         }
 
-        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+        $opts = unserialize(get_option('mdt_wc_easy_cf_piva_options'));
 
         $fields['billing']['fields']['billing_cfpiva'] = array(
-                                                            'label'       => $opts['settings_field'], //__('CF o PIVA', 'wc_cf_piva'),
-                                                            'description' => __('Partita Iva o Codice Fiscale associato', 'wc_cf_piva')
+                                                            'label'       => $opts['settings_field'], //__('CF o PIVA', 'mdt_wc_easy_cf_piva'),
+                                                            'description' => __('Partita Iva o Codice Fiscale associato', 'mdt_wc_easy_cf_piva')
                                                         );
 
         $fields['billing']['fields']['billing_ricfatt'] = array(
                                                             'type'        => 'select',
-                                                            'label'       => $opts['settings_select'], //__('Tipo Emissione Richiesta', 'wc_cf_piva'),
-                                                            'description' => __('Tipo di ricevuta per il cliente', 'wc_cf_piva'),
+                                                            'label'       => $opts['settings_select'], //__('Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva'),
+                                                            'description' => __('Tipo di ricevuta per il cliente', 'mdt_wc_easy_cf_piva'),
                                                             'options'   => array(
                                                                                     'RICEVUTA' => 'Ricevuta',
                                                                                     'FATTURA' => 'Fattura'
@@ -160,21 +160,21 @@ class Wc_Cf_Piva_Admin
     * @param    object $fields Billing fields
     * @return   object $fields Billing fields
     **/
-    public function wc_cf_piva_admin_billing_fields($fields)
+    public function mdt_wc_easy_cf_piva_admin_billing_fields($fields)
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Setting labels [ fields :: " . var_export($fields, true) . " ]...");
         }
         
-        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+        $opts = unserialize(get_option('mdt_wc_easy_cf_piva_options'));
 
         $fields['cfpiva'] = array(
-            'label' => $opts['order_field'], //__('CF o Partita Iva', 'wc_cf_piva'),
+            'label' => $opts['order_field'], //__('CF o Partita Iva', 'mdt_wc_easy_cf_piva'),
             'show'  => true
         );
 
         $fields['ricfatt'] = array(
-            'label' => $opts['order_select'], //__('Tipo Emissione Richiesta', 'wc_cf_piva'),
+            'label' => $opts['order_select'], //__('Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva'),
             'show'  => true
         );
 
@@ -202,7 +202,7 @@ class Wc_Cf_Piva_Admin
     ?>
     
     <div class="notice error is-dismissible" >
-        <p><?php _e('<strong>WooCommerce CF PIVA</strong> richiede l\'impostazione della lingua italiana per WordPress. ', 'wc_cf_piva'); ?></p>
+        <p><?php _e('<strong>WooCommerce CF PIVA</strong> richiede l\'impostazione della lingua italiana per WordPress. ', 'mdt_wc_easy_cf_piva'); ?></p>
     </div>
     
     <?php

@@ -6,8 +6,8 @@
  * @link       http://www.madaritech.com
  * @since      1.0.0
  *
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/includes
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/includes
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/includes
  * @author     Madaritech <freelance@madaritech.com>
  */
-class Wc_Cf_Piva_Loader {
+class Mdt_Wc_Easy_Cf_Piva_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

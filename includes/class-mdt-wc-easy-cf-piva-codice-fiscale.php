@@ -6,8 +6,8 @@
  * @link       http://www.madaritech.com
  * @since      1.0.0
  *
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/includes
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/includes
  */
 
 /**
@@ -16,19 +16,19 @@
  * This class defines all code necessary to manage Partita Iva values.
  *
  * @since      1.0.0
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/includes
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/includes
  * @author     Madaritech <freelance@madaritech.com>
  */
-class Wc_Cf_Piva_Codice_Fiscale
+class Mdt_Wc_Easy_Cf_Piva_Codice_Fiscale
 {
 
     /*
-    * A {@link Wc_Cf_Piva_Log_Service} instance.
+    * A {@link Mdt_Wc_Easy_Cf_Piva_Log_Service} instance.
     *
     * @since 1.0.0
     * @access private
-    * @var \Wc_Cf_Piva_Log_Service $log A {@link Wc_Cf_Piva_Log_Service} instance.
+    * @var \Mdt_Wc_Easy_Cf_Piva_Log_Service $log A {@link Mdt_Wc_Easy_Cf_Piva_Log_Service} instance.
     */
     private $log;
 
@@ -38,7 +38,7 @@ class Wc_Cf_Piva_Codice_Fiscale
      *
      * @since    1.0.0
      * @access   protected
-     * @var      Wc_Cf_Piva_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @var      Mdt_Wc_Easy_Cf_Piva_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
     private $codice_fiscale;
 
@@ -51,7 +51,7 @@ class Wc_Cf_Piva_Codice_Fiscale
      */
     public function __construct($cf)
     {
-        $this->log = Wc_Cf_Piva_Log_Service::create('Wc_Cf_Piva_Codice_Fiscale');
+        $this->log = Mdt_Wc_Easy_Cf_Piva_Log_Service::create('Mdt_Wc_Easy_Cf_Piva_Codice_Fiscale');
         $this->codice_fiscale = $cf;
     }
 

@@ -10,18 +10,18 @@
  *
  * @link              http://www.madaritech.com
  * @since             1.0.0
- * @package           Wc_Cf_Piva
+ * @package           Mdt_Wc_Easy_Cf_Piva
  *
  * @woocommerce-cf-piva
  * Plugin Name:       WooCommerce Easy Codice Fiscale Partita Iva
- * Plugin URI:        http://www.madaritech.com/wc-cf-piva
+ * Plugin URI:        http://www.madaritech.com/mdt-wc-easy-cf-piva
  * Description:       Add the "Partita IVA" e "Codice Fiscale" fields in WooCommerce for the italian market.
  * Version:           1.0.0
  * Author:            Madaritech
  * Author URI:        http://www.madaritech.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       wc-cf-piva
+ * Text Domain:       mdt-wc-easy-cf-piva
  * Domain Path:       /languages
  */
 
@@ -34,32 +34,32 @@ define('PLUGIN_VERSION', '1.0.0');
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-wc-cf-piva-activator.php
+ * This action is documented in includes/class-mdt-wc-easy-cf-piva-activator.php
  */
-function activate_wc_cf_piva()
+function activate_mdt_wc_easy_cf_piva()
 {
-    require_once plugin_dir_path(__FILE__) . 'includes/class-wc-cf-piva-activator.php';
-    Wc_Cf_Piva_Activator::activate();
+    require_once plugin_dir_path(__FILE__) . 'includes/class-mdt-wc-easy-cf-piva-activator.php';
+    Mdt_Wc_Easy_Cf_Piva_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-wc-cf-piva-deactivator.php
+ * This action is documented in includes/class-mdt-wc-easy-cf-piva-deactivator.php
  */
-function deactivate_wc_cf_piva()
+function deactivate_mdt_wc_easy_cf_piva()
 {
-    require_once plugin_dir_path(__FILE__) . 'includes/class-wc-cf-piva-deactivator.php';
-    Wc_Cf_Piva_Deactivator::deactivate();
+    require_once plugin_dir_path(__FILE__) . 'includes/class-mdt-wc-easy-cf-piva-deactivator.php';
+    Mdt_Wc_Easy_Cf_Piva_Deactivator::deactivate();
 }
 
-register_activation_hook(__FILE__, 'activate_wc_cf_piva');
-register_deactivation_hook(__FILE__, 'deactivate_wc_cf_piva');
+register_activation_hook(__FILE__, 'activate_mdt_wc_easy_cf_piva');
+register_deactivation_hook(__FILE__, 'deactivate_mdt_wc_easy_cf_piva');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path(__FILE__) . 'includes/class-wc-cf-piva.php';
+require plugin_dir_path(__FILE__) . 'includes/class-mdt-wc-easy-cf-piva.php';
 
 /**
  * Begins execution of the plugin.
@@ -70,9 +70,9 @@ require plugin_dir_path(__FILE__) . 'includes/class-wc-cf-piva.php';
  *
  * @since    1.0.0
  */
-function run_wc_cf_piva()
+function run_mdt_wc_easy_cf_piva()
 {
-    $plugin = new Wc_Cf_Piva();
+    $plugin = new Mdt_Wc_Easy_Cf_Piva();
     $plugin->run();
 }
-run_wc_cf_piva();
+run_mdt_wc_easy_cf_piva();

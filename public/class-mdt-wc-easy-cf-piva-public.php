@@ -6,8 +6,8 @@
  * @link       http://www.madaritech.com
  * @since      1.0.0
  *
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/public
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/public
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/public
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/public
  * @author     Madaritech <freelance@madaritech.com>
  */
-class Wc_Cf_Piva_Public
+class Mdt_Wc_Easy_Cf_Piva_Public
 {
 
     /**
@@ -42,11 +42,11 @@ class Wc_Cf_Piva_Public
     private $version;
 
     /*
-    * A {@link Wc_Cf_Piva_Log_Service} instance.
+    * A {@link Mdt_Wc_Easy_Cf_Piva_Log_Service} instance.
     *
     * @since 1.0.0
     * @access private
-    * @var \Wc_Cf_Piva_Log_Service $log A {@link Wc_Cf_Piva_Log_Service} instance.
+    * @var \Mdt_Wc_Easy_Cf_Piva_Log_Service $log A {@link Mdt_Wc_Easy_Cf_Piva_Log_Service} instance.
     */
     private $log;
 
@@ -59,7 +59,7 @@ class Wc_Cf_Piva_Public
      */
     public function __construct($plugin_name, $version)
     {
-        $this->log = Wc_Cf_Piva_Log_Service::create('Wc_Cf_Piva_Public');
+        $this->log = Mdt_Wc_Easy_Cf_Piva_Log_Service::create('Mdt_Wc_Easy_Cf_Piva_Public');
         $this->plugin_name = $plugin_name;
         $this->version = $version;
     }
@@ -73,13 +73,13 @@ class Wc_Cf_Piva_Public
      * @return   array $fields Billing cubrid_field_seek(result)
      */
     
-    public function wc_cf_piva_billing_fields($fields)
+    public function mdt_wc_easy_cf_piva_billing_fields($fields)
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Adding select and text fields [ fields :: " . var_export($fields, true) . " ]...");
         }
 
-        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+        $opts = unserialize(get_option('mdt_wc_easy_cf_piva_options'));
 
         $fields['billing_ricfatt'] = array(
             'type'      => 'select',
@@ -116,13 +116,13 @@ class Wc_Cf_Piva_Public
      * @since    1.0.0
      * @access   public
      */
-    public function wc_cf_piva_js_show_hide_fields()
+    public function mdt_wc_easy_cf_piva_js_show_hide_fields()
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Enqueueing js for show/hide CF PIVA field...");
         }
 
-        wp_enqueue_script('select_show_hide_cf_piva_field', plugin_dir_url(__FILE__) . 'js/wc-cf-piva-public.js', array( 'jquery' ), $this->version, true);
+        wp_enqueue_script('select_show_hide_cf_piva_field', plugin_dir_url(__FILE__) . 'js/mdt-wc-easy-cf-piva-public.js', array( 'jquery' ), $this->version, true);
 
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Enqueued js for show/hide CF PIVA field...");
@@ -135,7 +135,7 @@ class Wc_Cf_Piva_Public
     * @since    1.0.0
     * @access   public
     */
-    public function wc_cf_piva_fields_validation()
+    public function mdt_wc_easy_cf_piva_fields_validation()
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Validating CF PIVA field...");
@@ -151,25 +151,25 @@ class Wc_Cf_Piva_Public
                 
                 switch (strlen($cfpiva)) {
                     case 16:
-                        $codice_fiscale = new Wc_Cf_Piva_Codice_Fiscale($cfpiva);
+                        $codice_fiscale = new Mdt_Wc_Easy_Cf_Piva_Codice_Fiscale($cfpiva);
                         $codice_fiscale_ok = $codice_fiscale->verify();
                         if (!$codice_fiscale_ok) {
-                            $message = __(' ha un formato non valido.', 'wc_cf_piva');
+                            $message = __(' ha un formato non valido.', 'mdt_wc_easy_cf_piva');
                         }
                         break;
                     case 11:
-                        $partita_iva = new Wc_Cf_Piva_Partita_Iva($cfpiva);
+                        $partita_iva = new Mdt_Wc_Easy_Cf_Piva_Partita_Iva($cfpiva);
                         $partita_iva_ok = $partita_iva->verify();
                         if (!$partita_iva_ok) {
-                            $message = __(' ha un formato non valido.', 'wc_cf_piva');
+                            $message = __(' ha un formato non valido.', 'mdt_wc_easy_cf_piva');
                         }
                         break;
                     default:
-                        $message = __(' ha un formato non valido.', 'wc_cf_piva');
+                        $message = __(' ha un formato non valido.', 'mdt_wc_easy_cf_piva');
                         break;
                 }
             } else {
-                $message = __(' è un campo obbligatorio.', 'wc_cf_piva');
+                $message = __(' è un campo obbligatorio.', 'mdt_wc_easy_cf_piva');
             }
 
             if (!empty($message)) {
@@ -189,7 +189,7 @@ class Wc_Cf_Piva_Public
     * @access   public
     * @param    int $order_id
     */
-    public function wc_cf_piva_checkout_field_update_order_meta($order_id)
+    public function mdt_wc_easy_cf_piva_checkout_field_update_order_meta($order_id)
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Update order meta with CF PIVA and type fields value [ order_id :: $order_id ]...");
@@ -219,7 +219,7 @@ class Wc_Cf_Piva_Public
     * @access   public
     * @param    int $user_id
     **/
-    public function wc_cf_piva_checkout_field_update_user_meta($user_id)
+    public function mdt_wc_easy_cf_piva_checkout_field_update_user_meta($user_id)
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Update user meta with CF PIVA and type fields value [ user_id :: $user_id ]...");
@@ -251,7 +251,7 @@ class Wc_Cf_Piva_Public
     * @param    object $order Order referenced
     * @return   object $fields Billing fields
     **/
-    public function wc_cf_piva_formatted_billing_address($fields, $order)
+    public function mdt_wc_easy_cf_piva_formatted_billing_address($fields, $order)
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Updating CF PIVA and type fields value from order [ fields :: " . var_export($fields, true) . " ][ order :: " . var_export($order, true) . " ]...");
@@ -277,7 +277,7 @@ class Wc_Cf_Piva_Public
     * @param    string $type Type of fields (billing or shipping)
     * @return   object $fields Billing fields
     **/
-    public function wc_cf_piva_my_account_my_address_formatted_address($fields, $customer_id, $type)
+    public function mdt_wc_easy_cf_piva_my_account_my_address_formatted_address($fields, $customer_id, $type)
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Updating CF PIVA and type fields value from user meta [ fields :: " . var_export($fields, true) . " ][ customer_id ::  $customer_id ][ type ::  $type ]...");
@@ -305,7 +305,7 @@ class Wc_Cf_Piva_Public
     * @param    string $type Type of fields (billing or shipping)
     * @return   object $fields Billing fields
     **/
-    public function wc_cf_piva_address_to_edit($address)
+    public function mdt_wc_easy_cf_piva_address_to_edit($address)
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Updating CF PIVA and type address fields value from user meta [ address :: " . var_export($address, true) . " ]...");
@@ -318,7 +318,7 @@ class Wc_Cf_Piva_Public
             return $address;
         }
 
-        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+        $opts = unserialize(get_option('mdt_wc_easy_cf_piva_options'));
 
         /*** Per la parte di modifica ***/
         if (! isset($address['billing_cfpiva'])) {
@@ -359,13 +359,13 @@ class Wc_Cf_Piva_Public
     * @param    string $type Type of fields (billing or shipping)
     * @return   object $fields Billing fields
     **/
-    public function wc_cf_piva_formatted_address_replacements($address, $args)
+    public function mdt_wc_easy_cf_piva_formatted_address_replacements($address, $args)
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Updating CF PIVA and type address fields value in WooCommerce profile page [ address :: " . var_export($address, true) . " ][ args :: " . var_export($args, true) . " ]...");
         }
 
-        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+        $opts = unserialize(get_option('mdt_wc_easy_cf_piva_options'));
 
         $address['{cfpiva}'] = '';
         $address['{ricfatt}'] = '';
@@ -394,7 +394,7 @@ class Wc_Cf_Piva_Public
     * @param    object $formats
     * @return   object $formats
     **/
-    public function wc_cf_piva_localization_address_format($formats)
+    public function mdt_wc_easy_cf_piva_localization_address_format($formats)
     {
         if (Wc_cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Mapping the keys in the address section of WooCommerce user profile, based on the country code [ formats :: " . var_export($formats, true) . " ]...");

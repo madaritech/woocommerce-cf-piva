@@ -8,8 +8,8 @@
  * @link       http://www.madaritech.com
  * @since      1.0.0
  *
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/admin/partials
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/admin/partials
  */
 ?>
 
@@ -20,7 +20,7 @@
             <img src="<?php echo plugins_url('../images/icon-128x128.jpg', __FILE__); ?>" alt="WooCommerce Easy Codice Fiscale Partita Iva" height="120px">
         </td>
         <td>
-            <div style="font-size: 30px; font-weight: bold; margin-bottom: 10px; color: black;">&nbsp;<?php esc_attr_e('WooCommerce Easy Codice Fiscale Partita Iva', 'wc_cf_piva'); ?></div>
+            <div style="font-size: 30px; font-weight: bold; margin-bottom: 10px; color: black;">&nbsp;<?php esc_attr_e('WooCommerce Easy Codice Fiscale Partita Iva', 'mdt_wc_easy_cf_piva'); ?></div>
             <div style="font-size: 14px; font-weight: bold;">&nbsp;&nbsp;by <a href="http://www.madaritech.com" target="_blank">Madaritech</a></div>
         </td>
     </tr>
@@ -31,7 +31,7 @@
 <div class="wrap">
 
 	<div id="icon-options-general" class="icon32"></div>
-	<h1><?php esc_attr_e('Impostazioni', 'wc_cf_piva'); ?></h1>
+	<h1><?php esc_attr_e('Impostazioni', 'mdt_wc_easy_cf_piva'); ?></h1>
 
 	<div id="poststuff">
 
@@ -47,24 +47,24 @@
 
 						<div class="postbox">
 
-							<h2><span><?php esc_attr_e('Configura le etichette dei campi che verranno visualizzati', 'wc_cf_piva'); ?></span></h2>
+							<h2><span><?php esc_attr_e('Configura le etichette dei campi che verranno visualizzati', 'mdt_wc_easy_cf_piva'); ?></span></h2>
 
 							<div class="inside">
-								<p><?php esc_attr_e('Se si desidera modificare i valori di default delle etichette per ciascun campo, utilizzare i campi qui sotto riportati', 'wc_cf_piva'); ?>:</p>
+								<p><?php esc_attr_e('Se si desidera modificare i valori di default delle etichette per ciascun campo, utilizzare i campi qui sotto riportati', 'mdt_wc_easy_cf_piva'); ?>:</p>
 
-                                <input type="text" name="checkout_select_label" placeholder="Ricevuta Fiscale o Fattura" value="<?php echo $opts['checkout_select'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end, al checkout, per la selezione del tipo di dettaglio di fatturazione desiderato', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="checkout_select_label" placeholder="Ricevuta Fiscale o Fattura" value="<?php echo $opts['checkout_select'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end, al checkout, per la selezione del tipo di dettaglio di fatturazione desiderato', 'mdt_wc_easy_cf_piva'); ?></span><br><br>
                                 
-                                <input type="text" name="checkout_field_label" placeholder="Codice Fiscale o Partita IVA" value="<?php echo $opts['checkout_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end, al checkout, per l\'inserimento del Codice Fiscale o della Partita Iva', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="checkout_field_label" placeholder="Codice Fiscale o Partita IVA" value="<?php echo $opts['checkout_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end, al checkout, per l\'inserimento del Codice Fiscale o della Partita Iva', 'mdt_wc_easy_cf_piva'); ?></span><br><br>
                                 
-                                <input type="text" name="profile_field_label" placeholder="CF o PIVA" value="<?php echo $opts['profile_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end,  nella pagina di profilo del cliente', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="profile_field_label" placeholder="CF o PIVA" value="<?php echo $opts['profile_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end,  nella pagina di profilo del cliente', 'mdt_wc_easy_cf_piva'); ?></span><br><br>
 
-                                <input type="text" name="order_field_label" placeholder="CF o Partita Iva" value="<?php echo $opts['order_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il Codice Fiscale o la Partita Iva inserita dal cliente', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="order_field_label" placeholder="CF o Partita Iva" value="<?php echo $opts['order_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il Codice Fiscale o la Partita Iva inserita dal cliente', 'mdt_wc_easy_cf_piva'); ?></span><br><br>
                                 
-                                <input type="text" name="order_select_label" placeholder="Tipo Emissione Richiesta" value="<?php echo $opts['order_select'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il tipo di dettaglio di fatturazione richiesto dal cliente', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="order_select_label" placeholder="Tipo Emissione Richiesta" value="<?php echo $opts['order_select'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il tipo di dettaglio di fatturazione richiesto dal cliente', 'mdt_wc_easy_cf_piva'); ?></span><br><br>
                                 
-                                <input type="text" name="settings_field_label" placeholder="CF o PIVA" value="<?php echo $opts['settings_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="settings_field_label" placeholder="CF o PIVA" value="<?php echo $opts['settings_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'mdt_wc_easy_cf_piva'); ?></span><br><br>
 
-                                <input type="text" name="settings_select_label" placeholder="Tipo Enmissione Richiesta" value="<?php echo $opts['settings_select'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="settings_select_label" placeholder="Tipo Enmissione Richiesta" value="<?php echo $opts['settings_select'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'mdt_wc_easy_cf_piva'); ?></span><br><br>
 
                                 <?php submit_button($text = null, $type = 'primary', $name = 'submit', $wrap = true, $other_attributes = null);?>
 							</div>
@@ -87,19 +87,19 @@
 				<div class="meta-box-sortables">
 
 					<div class="postbox">
-                        <h2 class="hndle"><span><?php esc_attr_e('Take it Easy!', 'wc_cf_piva'); ?></span></h2>
+                        <h2 class="hndle"><span><?php esc_attr_e('Take it Easy!', 'mdt_wc_easy_cf_piva'); ?></span></h2>
 
 						<div class="inside">
 						 
 							<ol>
 							    <li>
-							    	<p><?php esc_attr_e('Un menu a tendina permette al cliente di specificare il tipo di fatturazione: Ricevuta Fiscale o Fattura', 'wc_cf_piva'); ?></p>
+							    	<p><?php esc_attr_e('Un menu a tendina permette al cliente di specificare il tipo di fatturazione: Ricevuta Fiscale o Fattura', 'mdt_wc_easy_cf_piva'); ?></p>
 							    </li>
 								<li>
-                           			<p><?php esc_attr_e('Nel caso il cliente selezioni la fattura, al checkout viene aggiunto un apposito campo obbligatorio nel quale il cliente può specificare la Partita Iva o il Codice Fiscale', 'wc_cf_piva'); ?></p>
+                           			<p><?php esc_attr_e('Nel caso il cliente selezioni la fattura, al checkout viene aggiunto un apposito campo obbligatorio nel quale il cliente può specificare la Partita Iva o il Codice Fiscale', 'mdt_wc_easy_cf_piva'); ?></p>
                            		</li>
                            		<li>
-                            		<p><?php esc_attr_e('Nel caso il cliente selezioni la fattura, nell\'ordine verrà specificata la scelta operata e il valore del Codice Fiscale e/o della Partita Iva', 'wc_cf_piva'); ?></p>
+                            		<p><?php esc_attr_e('Nel caso il cliente selezioni la fattura, nell\'ordine verrà specificata la scelta operata e il valore del Codice Fiscale e/o della Partita Iva', 'mdt_wc_easy_cf_piva'); ?></p>
                             	</li>
                             </ol>
 						</div>
@@ -111,11 +111,11 @@
 
 						<h2 class="hndle"><span><?php esc_attr_e(
                                     'Vuoi contribuire?',
-                                        'wc_cf_piva'
+                                        'mdt_wc_easy_cf_piva'
                                 ); ?></span></h2>
 
 						<div class="inside">
-						    <p><?php esc_attr_e('Questo plugin è completamente gratuito. Aiutami a migliorarlo con versioni sempre più aggiornate e ad implementare nuove funzionalità. Puoi contribuire con una recensione e\o una donazione. Per domande o suggerimenti puoi lasciare un messaggio nella seguente form: ', 'wc_cf_piva'); ?><a href="http://www.madaritech.com/#menu-contact" target="_blank">Madaritech contact form</a></p>
+						    <p><?php esc_attr_e('Questo plugin è completamente gratuito. Aiutami a migliorarlo con versioni sempre più aggiornate e ad implementare nuove funzionalità. Puoi contribuire con una recensione e\o una donazione. Per domande o suggerimenti puoi lasciare un messaggio nella seguente form: ', 'mdt_wc_easy_cf_piva'); ?><a href="http://www.madaritech.com/#menu-contact" target="_blank">Madaritech contact form</a></p>
 
 						    <div align="center">
                                 <p>

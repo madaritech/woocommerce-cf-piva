@@ -5,18 +5,18 @@
  * A service which provides functions for logging.
  *
  * @since      1.0.0
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/includes
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/includes
  */
 
 /**
- * Define the {@link Wc_Cf_Piva_Log_Service} class.
+ * Define the {@link Mdt_Wc_Easy_Cf_Piva_Log_Service} class.
  *
  * @since      1.0.0
- * @package    Wc_Cf_Piva
- * @subpackage Wc_Cf_Piva/includes
+ * @package    Mdt_Wc_Easy_Cf_Piva
+ * @subpackage Mdt_Wc_Easy_Cf_Piva/includes
  */
-class Wc_Cf_Piva_Log_Service
+class Mdt_Wc_Easy_Cf_Piva_Log_Service
 {
 
     /**
@@ -29,7 +29,7 @@ class Wc_Cf_Piva_Log_Service
     private $class_name;
 
     /**
-     * Create a {@link Wc_Cf_Piva_Log_Service} instance.
+     * Create a {@link Mdt_Wc_Easy_Cf_Piva_Log_Service} instance.
      *
      * @since 1.0.0
      *
@@ -53,17 +53,17 @@ class Wc_Cf_Piva_Log_Service
     }
 
     /**
-     * Create a {@link Wc_Cf_Piva_Log_Service} instance with the provided class name.
+     * Create a {@link Mdt_Wc_Easy_Cf_Piva_Log_Service} instance with the provided class name.
      *
      * @since 1.0.0
      *
      * @param string $class_name The class name source of logging events.
      *
-     * @return \Wc_Cf_Piva_Log_Service A {@link Wc_Cf_Piva_Log_Service} instance.
+     * @return \Mdt_Wc_Easy_Cf_Piva_Log_Service A {@link Mdt_Wc_Easy_Cf_Piva_Log_Service} instance.
      */
     public static function create($class_name)
     {
-        return new Wc_Cf_Piva_Log_Service($class_name);
+        return new Mdt_Wc_Easy_Cf_Piva_Log_Service($class_name);
     }
 
     /**
