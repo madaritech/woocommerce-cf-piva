@@ -92,6 +92,8 @@ class Mdt_Wc_Easy_Cf_Piva_Admin
             wp_die(__('You do not have sufficient permissions to access this page.', 'mdt_wc_easy_cf_piva'));
         }
 
+        $save_settings = false;
+
         if (isset($_POST['form_submitted'])) {
             $hidden_field = esc_html($_POST['form_submitted']);
 
@@ -106,6 +108,8 @@ class Mdt_Wc_Easy_Cf_Piva_Admin
                 $opts['settings_select']  = isset($_POST['settings_select_label']) ? sanitize_text_field($_POST['settings_select_label']) : '';
 
                 update_option('mdt_wc_easy_cf_piva_options', serialize($opts));
+
+                $save_settings = true;
             }
         }
 
@@ -124,7 +128,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin
     **/
     public function mdt_wc_easy_cf_piva_customer_meta_fields($fields)
     {
-        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+        if (Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Setting customer meta fields [ fields :: " . var_export($fields, true) . " ]...");
         }
 
@@ -145,7 +149,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin
                                                                             )
                                                         );
         
-        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+        if (Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Set customer meta fields [ fields :: " . var_export($fields, true) . " ]...");
         }
         
@@ -162,7 +166,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin
     **/
     public function mdt_wc_easy_cf_piva_admin_billing_fields($fields)
     {
-        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+        if (Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Setting labels [ fields :: " . var_export($fields, true) . " ]...");
         }
         
@@ -178,7 +182,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin
             'show'  => true
         );
 
-        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+        if (Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Labels set [ fields :: " . var_export($fields, true) . " ]...");
         }
 
@@ -193,7 +197,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin
      */
     public function language_admin_notice()
     {
-        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+        if (Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Language check...");
         }
         $lang = get_locale();
@@ -208,7 +212,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin
     <?php
         endif;
 
-        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+        if (Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Language checked [ lang :: $lang ]...");
         }
     }

@@ -33,6 +33,14 @@
 	<div id="icon-options-general" class="icon32"></div>
 	<h1><?php esc_attr_e('Impostazioni', 'mdt_wc_easy_cf_piva'); ?></h1>
 
+<?php if ($save_settings) : ?>
+
+    <div class="notice notice-success is-dismissible" >
+        <p><strong><?php _e( 'Impostazioni salvate.', 'mdt_wc_easy_cf_piva' ); ?></strong></p>
+    </div>
+
+<?php endif; ?>
+
 	<div id="poststuff">
 
 		<div id="post-body" class="metabox-holder columns-2">

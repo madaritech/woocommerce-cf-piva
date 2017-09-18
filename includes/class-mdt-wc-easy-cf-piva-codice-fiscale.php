@@ -63,7 +63,7 @@ class Mdt_Wc_Easy_Cf_Piva_Codice_Fiscale
      */
     public function verify()
     {
-        if (Wc_cf_Piva_Log_Service::is_enabled()) {
+        if (Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled()) {
             $this->log->debug("Verifing Codice Fiscale [ codice_fiscale :: $this->codice_fiscale ]...");
         }
 

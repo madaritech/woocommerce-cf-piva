@@ -32,7 +32,7 @@ class Mdt_Wc_Easy_Cf_Piva_Activator
      */
     public static function activate()
     {
-        if (!get_option('wc_easy_cf_piva_options')) {
+        if (!get_option('mdt_wc_easy_cf_piva_options')) {
             $opts['checkout_select'] = 'Ricevuta Fiscale o Fattura';
             $opts['checkout_field']  = 'Codice Fiscale o Partita IVA';
             $opts['profile_field']  = 'CF o PIVA';
@@ -41,7 +41,7 @@ class Mdt_Wc_Easy_Cf_Piva_Activator
             $opts['settings_field']  = 'CF o PIVA';
             $opts['settings_select']  = 'Tipo Emissione Richiesta';
 
-            update_option('wc_easy_cf_piva_options', serialize($opts));
+            update_option('mdt_wc_easy_cf_piva_options', serialize($opts));
         }
     }
 }
