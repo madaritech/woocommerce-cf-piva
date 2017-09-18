@@ -52,20 +52,24 @@
 							<div class="inside">
 								<p><?php esc_attr_e('Se si desidera modificare i valori di default delle etichette per ciascun campo, utilizzare i campi qui sotto riportati', 'wc_cf_piva'); ?>:</p>
 
-                                <input type="text" placeholder="Ricevuta Fiscale o Fattura" value="Ricevuta Fiscale o Fattura" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end, al checkout, per la selezione del tipo di dettaglio di fatturazione desiderato', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="checkout_select_label" placeholder="Ricevuta Fiscale o Fattura" value="<?php echo $opts['checkout_select'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end, al checkout, per la selezione del tipo di dettaglio di fatturazione desiderato', 'wc_cf_piva'); ?></span><br><br>
                                 
-                                <input type="text" placeholder="Codice Fiscale o Partita IVA" value="Codice Fiscale o Partita IVA" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end, al checkout, per l\'inserimento del Codice Fiscale o della Partita Iva', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="checkout_field_label" placeholder="Codice Fiscale o Partita IVA" value="<?php echo $opts['checkout_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end, al checkout, per l\'inserimento del Codice Fiscale o della Partita Iva', 'wc_cf_piva'); ?></span><br><br>
                                 
-                                <input type="text" placeholder="CF o PIVA" value="CF o PIVA" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end,  nella pagina di profilo del cliente', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="profile_field_label" placeholder="CF o PIVA" value="<?php echo $opts['profile_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel front-end,  nella pagina di profilo del cliente', 'wc_cf_piva'); ?></span><br><br>
 
-                                <input type="text" placeholder="CF o Partita Iva" value="CF o Partita Iva" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il Codice Fiscale o la Partita Iva inserita dal cliente', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="order_field_label" placeholder="CF o Partita Iva" value="<?php echo $opts['order_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il Codice Fiscale o la Partita Iva inserita dal cliente', 'wc_cf_piva'); ?></span><br><br>
                                 
-                                <input type="text" placeholder="Tipo Emissione Richiesta" value="Tipo Emissione Richiesta" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il tipo di dettaglio di fatturazione richiesto dal cliente', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="order_select_label" placeholder="Tipo Emissione Richiesta" value="<?php echo $opts['order_select'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il tipo di dettaglio di fatturazione richiesto dal cliente', 'wc_cf_piva'); ?></span><br><br>
                                 
-                                <input type="text" placeholder="CF o PIVA" value="CF o PIVA" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'wc_cf_piva'); ?></span><br><br>
+                                <input type="text" name="settings_field_label" placeholder="CF o PIVA" value="<?php echo $opts['settings_field'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'wc_cf_piva'); ?></span><br><br>
+
+                                <input type="text" name="settings_select_label" placeholder="Tipo Enmissione Richiesta" value="<?php echo $opts['settings_select'] ?>" class="regular-text" /><span class="description"><?php esc_attr_e('Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'wc_cf_piva'); ?></span><br><br>
+
+                                <?php submit_button($text = null, $type = 'primary', $name = 'submit', $wrap = true, $other_attributes = null);?>
 							</div>
 							<!-- .inside -->
-
+                            
 						</div>
 						<!-- .postbox -->
 
@@ -83,16 +87,13 @@
 				<div class="meta-box-sortables">
 
 					<div class="postbox">
-						<h2 class="hndle"><span><?php esc_attr_e(
-                                    'Istruzioni',
-                                        'wc_cf_piva'
-                                ); ?></span></h2>
+                        <h2 class="hndle"><span><?php esc_attr_e('Take it Easy!', 'wc_cf_piva'); ?></span></h2>
 
 						<div class="inside">
 						 
 							<ol>
 							    <li>
-							    	<p><?php esc_attr_e('Visualizza un menu a tendina che permette al cliente di specificare il tipo di fatturazione, Ricevuta Fiscale o Fattura', 'wc_cf_piva'); ?></p>
+							    	<p><?php esc_attr_e('Un menu a tendina permette al cliente di specificare il tipo di fatturazione: Ricevuta Fiscale o Fattura', 'wc_cf_piva'); ?></p>
 							    </li>
 								<li>
                            			<p><?php esc_attr_e('Nel caso il cliente selezioni la fattura, al checkout viene aggiunto un apposito campo obbligatorio nel quale il cliente può specificare la Partita Iva o il Codice Fiscale', 'wc_cf_piva'); ?></p>

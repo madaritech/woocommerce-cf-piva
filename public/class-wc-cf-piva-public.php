@@ -79,9 +79,11 @@ class Wc_Cf_Piva_Public
             $this->log->debug("Adding select and text fields [ fields :: " . var_export($fields, true) . " ]...");
         }
 
+        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+
         $fields['billing_ricfatt'] = array(
             'type'      => 'select',
-            'label'     => __('Ricevuta Fiscale o Fattura', 'wp_cf_piva'),
+            'label'     => $opts['checkout_select'],
             'required'  => false,
             'class'     => array('form-row-wide'),
             'clear'     => true,
@@ -93,8 +95,8 @@ class Wc_Cf_Piva_Public
         );
 
         $fields['billing_cfpiva'] = array(
-            'label'         => __('Codice Fiscale o Partita IVA', 'wp_cf_piva'),
-            'placeholder'   => _x('Codice Fiscale o Partita IVA', 'placeholder', 'wp_cf_piva'),
+            'label'         => $opts['checkout_field'],
+            'placeholder'   => $opts['checkout_field'], //_x('Codice Fiscale o Partita IVA', 'placeholder', 'wp_cf_piva'),
             'required'      => false,
             'class'         => array('form-row-wide'),
             'clear'         => true,
@@ -316,11 +318,13 @@ class Wc_Cf_Piva_Public
             return $address;
         }
 
+        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+
         /*** Per la parte di modifica ***/
         if (! isset($address['billing_cfpiva'])) {
             $address['billing_cfpiva'] = array(
-                'label'       => __('CF o PIVA', 'wp_cf_piva'),
-                'placeholder' => _x('CF o PIVA', 'placeholder', 'wp_cf_piva'),
+                'label'       => $opts['profile_field'],
+                'placeholder' => $opts['profile_field'], //_x('CF o PIVA', 'placeholder', 'wp_cf_piva'),
                 'required'    => true, //change to false if you do not need this field to be required
                 'class'       => array( 'form-row-first' ),
                 'value'       => get_user_meta(get_current_user_id(), 'billing_cfpiva', true)
@@ -361,6 +365,8 @@ class Wc_Cf_Piva_Public
             $this->log->debug("Updating CF PIVA and type address fields value in WooCommerce profile page [ address :: " . var_export($address, true) . " ][ args :: " . var_export($args, true) . " ]...");
         }
 
+        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+
         $address['{cfpiva}'] = '';
         $address['{ricfatt}'] = '';
 
@@ -369,7 +375,7 @@ class Wc_Cf_Piva_Public
         if (in_array('customer', (array) $user->roles)) {
             //$address['{ssn}'] = '';
             if (!empty($args['cfpiva']) && !empty($args['ricfatt']) && $args['ricfatt']=='FATTURA') {
-                $address['{cfpiva}'] = __('CF o PIVA', 'wc_cf_piva') . ' ' . $args['cfpiva'];
+                $address['{cfpiva}'] = $opts['profile_field'] . ' ' . $args['cfpiva'];
             }
         }
 

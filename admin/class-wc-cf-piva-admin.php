@@ -96,11 +96,20 @@ class Wc_Cf_Piva_Admin
             $hidden_field = esc_html($_POST['form_submitted']);
 
             if ($hidden_field == 'Y') {
-                update_option('wc_cf_piva_options', '');
+                $opts = array();
+                $opts['checkout_select'] = isset($_POST['checkout_select_label']) ? sanitize_text_field($_POST['checkout_select_label']) : '';
+                $opts['checkout_field']  = isset($_POST['checkout_field_label']) ? sanitize_text_field($_POST['checkout_field_label']) : '';
+                $opts['profile_field']  = isset($_POST['profile_field_label']) ? sanitize_text_field($_POST['profile_field_label']) : '';
+                $opts['order_field']  = isset($_POST['order_field_label']) ? sanitize_text_field($_POST['order_field_label']) : '';
+                $opts['order_select']  = isset($_POST['order_select_label']) ? sanitize_text_field($_POST['order_select_label']) : '';
+                $opts['settings_field']  = isset($_POST['settings_field_label']) ? sanitize_text_field($_POST['settings_field_label']) : '';
+                $opts['settings_select']  = isset($_POST['settings_select_label']) ? sanitize_text_field($_POST['settings_select_label']) : '';
+
+                update_option('wc_easy_cf_piva_options', serialize($opts));
             }
         }
 
-        $synchro_mailchimp_options = get_option('wc_cf_piva_options');
+        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
             
         require_once('partials/wc-cf-piva-admin-display.php');
     }
@@ -119,15 +128,17 @@ class Wc_Cf_Piva_Admin
             $this->log->debug("Setting customer meta fields [ fields :: " . var_export($fields, true) . " ]...");
         }
 
+        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+
         $fields['billing']['fields']['billing_cfpiva'] = array(
-                                                            'label'       => __('CF o PIVA', 'wc_cf_piva'),
-                                                            'description' => 'Partita Iva o Codice Fiscale associato'
+                                                            'label'       => $opts['settings_field'], //__('CF o PIVA', 'wc_cf_piva'),
+                                                            'description' => __('Partita Iva o Codice Fiscale associato', 'wc_cf_piva')
                                                         );
 
         $fields['billing']['fields']['billing_ricfatt'] = array(
                                                             'type'        => 'select',
-                                                            'label'       => __('Tipo Emissione Richiesta', 'wc_cf_piva'),
-                                                            'description' => 'Tipo di ricevuta per il cliente',
+                                                            'label'       => $opts['settings_select'], //__('Tipo Emissione Richiesta', 'wc_cf_piva'),
+                                                            'description' => __('Tipo di ricevuta per il cliente', 'wc_cf_piva'),
                                                             'options'   => array(
                                                                                     'RICEVUTA' => 'Ricevuta',
                                                                                     'FATTURA' => 'Fattura'
@@ -155,13 +166,15 @@ class Wc_Cf_Piva_Admin
             $this->log->debug("Setting labels [ fields :: " . var_export($fields, true) . " ]...");
         }
         
+        $opts = unserialize(get_option('wc_easy_cf_piva_options'));
+
         $fields['cfpiva'] = array(
-            'label' => __('CF o Partita Iva', 'wc_cf_piva'),
+            'label' => $opts['order_field'], //__('CF o Partita Iva', 'wc_cf_piva'),
             'show'  => true
         );
 
         $fields['ricfatt'] = array(
-            'label' => __('Tipo Emissione Richiesta', 'wc_cf_piva'),
+            'label' => $opts['order_select'], //__('Tipo Emissione Richiesta', 'wc_cf_piva'),
             'show'  => true
         );
 
@@ -189,7 +202,7 @@ class Wc_Cf_Piva_Admin
     ?>
     
     <div class="notice error is-dismissible" >
-        <p><?php _e('<strong>WooCommerce CF PIVA</strong> needs italian language set in WordPress. Set it now! ', 'wc_cf_piva'); ?></p>
+        <p><?php _e('<strong>WooCommerce CF PIVA</strong> richiede l\'impostazione della lingua italiana per WordPress. ', 'wc_cf_piva'); ?></p>
     </div>
     
     <?php
