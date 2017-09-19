@@ -99,13 +99,13 @@ class Mdt_Wc_Easy_Cf_Piva_Admin
 
             if ($hidden_field == 'Y') {
                 $opts = array();
-                $opts['checkout_select'] = isset($_POST['checkout_select_label']) ? sanitize_text_field($_POST['checkout_select_label']) : '';
-                $opts['checkout_field']  = isset($_POST['checkout_field_label']) ? sanitize_text_field($_POST['checkout_field_label']) : '';
-                $opts['profile_field']  = isset($_POST['profile_field_label']) ? sanitize_text_field($_POST['profile_field_label']) : '';
-                $opts['order_field']  = isset($_POST['order_field_label']) ? sanitize_text_field($_POST['order_field_label']) : '';
-                $opts['order_select']  = isset($_POST['order_select_label']) ? sanitize_text_field($_POST['order_select_label']) : '';
-                $opts['settings_field']  = isset($_POST['settings_field_label']) ? sanitize_text_field($_POST['settings_field_label']) : '';
-                $opts['settings_select']  = isset($_POST['settings_select_label']) ? sanitize_text_field($_POST['settings_select_label']) : '';
+                $opts['checkout_select'] = isset($_POST['checkout_select_label']) ? esc_html(sanitize_text_field($_POST['checkout_select_label'])) : '';
+                $opts['checkout_field']  = isset($_POST['checkout_field_label']) ? esc_html(sanitize_text_field($_POST['checkout_field_label'])) : '';
+                $opts['profile_field']  = isset($_POST['profile_field_label']) ? esc_html(sanitize_text_field($_POST['profile_field_label'])) : '';
+                $opts['order_field']  = isset($_POST['order_field_label']) ? esc_html(sanitize_text_field($_POST['order_field_label'])) : '';
+                $opts['order_select']  = isset($_POST['order_select_label']) ? esc_html(sanitize_text_field($_POST['order_select_label'])) : '';
+                $opts['settings_field']  = isset($_POST['settings_field_label']) ? esc_html(sanitize_text_field($_POST['settings_field_label'])) : '';
+                $opts['settings_select']  = isset($_POST['settings_select_label']) ? esc_html(sanitize_text_field($_POST['settings_select_label'])) : '';
 
                 update_option('mdt_wc_easy_cf_piva_options', serialize($opts));
 
