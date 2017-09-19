@@ -73,7 +73,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin
     {
         add_menu_page(
             'WooCommerce CF Piva',
-            'WC CF PIva',
+            'WC Easy CF PIva',
             'manage_options',
             'mdt-wc-easy-cf-piva',
             array(&$this, 'mdt_wc_easy_cf_piva_settings_page'),
