@@ -67,7 +67,7 @@ class Mdt_Wc_Easy_Cf_Piva_Public
     /**
      * Adding selects and text fields for choose cd/piva.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      * @access   public
      * @param    array $fields WooCommerce fields
      * @return   array $fields Billing cubrid_field_seek(result)
@@ -79,7 +79,9 @@ class Mdt_Wc_Easy_Cf_Piva_Public
             $this->log->debug("Adding select and text fields [ fields :: " . var_export($fields, true) . " ]...");
         }
 
-        $opts = unserialize(get_option('mdt_wc_easy_cf_piva_options'));
+        //Compatibility check: in old version 1.0.0 need serialization
+        $options = get_option('mdt_wc_easy_cf_piva_options');
+        $opts = is_serialized($options) ? unserialize($options) : $options;
 
         $fields['billing_ricfatt'] = array(
             'type'      => 'select',
@@ -298,7 +300,7 @@ class Mdt_Wc_Easy_Cf_Piva_Public
     /**
     * WooCommerce profile page (client authenticated, editing address section) get user page value. Shows fields on the update form with the same values as in the user page
     *
-    * @since    1.0.0
+    * @since    1.0.1
     * @access   public
     * @param    object $fields Billing fields
     * @param    int    $customer_id Order referenced
@@ -318,7 +320,9 @@ class Mdt_Wc_Easy_Cf_Piva_Public
             return $address;
         }
 
-        $opts = unserialize(get_option('mdt_wc_easy_cf_piva_options'));
+                //Compatibility check: in old version 1.0.0 need serialization
+        $options = get_option('mdt_wc_easy_cf_piva_options');
+        $opts = is_serialized($options) ? unserialize($options) : $options;
 
         /*** Per la parte di modifica ***/
         if (! isset($address['billing_cfpiva'])) {
@@ -352,7 +356,7 @@ class Mdt_Wc_Easy_Cf_Piva_Public
     /**
     * WooCommerce profile page, address static section
     *
-    * @since    1.0.0
+    * @since    1.0.1
     * @access   public
     * @param    object $fields Billing fields
     * @param    int    $customer_id Order referenced
@@ -365,7 +369,9 @@ class Mdt_Wc_Easy_Cf_Piva_Public
             $this->log->debug("Updating CF PIVA and type address fields value in WooCommerce profile page [ address :: " . var_export($address, true) . " ][ args :: " . var_export($args, true) . " ]...");
         }
 
-        $opts = unserialize(get_option('mdt_wc_easy_cf_piva_options'));
+        //Compatibility check: in old version 1.0.0 need serialization
+        $options = get_option('mdt_wc_easy_cf_piva_options');
+        $opts = is_serialized($options) ? unserialize($options) : $options;
 
         $address['{cfpiva}'] = '';
         $address['{ricfatt}'] = '';

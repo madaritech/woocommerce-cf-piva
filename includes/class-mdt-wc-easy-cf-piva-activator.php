@@ -28,20 +28,21 @@ class Mdt_Wc_Easy_Cf_Piva_Activator
      *
      * Long Description.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      */
     public static function activate()
     {
         if (!get_option('mdt_wc_easy_cf_piva_options')) {
-            $opts['checkout_select'] = 'Ricevuta Fiscale o Fattura';
-            $opts['checkout_field']  = 'Codice Fiscale o Partita IVA';
-            $opts['profile_field']  = 'CF o PIVA';
-            $opts['order_field']  = 'CF o Partita Iva';
-            $opts['order_select']  = 'Tipo Emissione Richiesta';
-            $opts['settings_field']  = 'CF o PIVA';
-            $opts['settings_select']  = 'Tipo Emissione Richiesta';
 
-            update_option('mdt_wc_easy_cf_piva_options', serialize($opts));
+            $opts['checkout_select'] = __('Ricevuta Fiscale o Fattura', 'mdt_wc_easy_cf_piva');
+            $opts['checkout_field']  = __('Codice Fiscale o Partita IVA', 'mdt_wc_easy_cf_piva');
+            $opts['profile_field']   = __('CF o PIVA', 'mdt_wc_easy_cf_piva');
+            $opts['order_field']     = __('CF o Partita Iva', 'mdt_wc_easy_cf_piva');
+            $opts['order_select']    = __('Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva');
+            $opts['settings_field']  = __('CF o PIVA', 'mdt_wc_easy_cf_piva');
+            $opts['settings_select'] = __('Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva');
+
+            add_option('mdt_wc_easy_cf_piva_options', $opts);
         }
     }
 }
