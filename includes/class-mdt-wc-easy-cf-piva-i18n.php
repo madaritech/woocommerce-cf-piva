@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -25,8 +24,6 @@
  * @author     Madaritech <freelance@madaritech.com>
  */
 class Mdt_Wc_Easy_Cf_Piva_i18n {
-
-
 	/**
 	 * Load the plugin text domain for translation.
 	 *

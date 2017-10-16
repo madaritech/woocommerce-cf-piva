@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Provide a public-facing view for the plugin
  *
@@ -11,6 +10,7 @@
  * @package    Mdt_Wc_Easy_Cf_Piva
  * @subpackage Mdt_Wc_Easy_Cf_Piva/public/partials
  */
+
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->

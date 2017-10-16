@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Fired during plugin activation
  *
@@ -20,29 +19,28 @@
  * @subpackage Mdt_Wc_Easy_Cf_Piva/includes
  * @author     Madaritech <freelance@madaritech.com>
  */
-class Mdt_Wc_Easy_Cf_Piva_Activator
-{
+class Mdt_Wc_Easy_Cf_Piva_Activator {
 
-    /**
-     * Short Description. (use period)
-     *
-     * Long Description.
-     *
-     * @since    1.0.1
-     */
-    public static function activate()
-    {
-        if (!get_option('mdt_wc_easy_cf_piva_options')) {
 
-            $opts['checkout_select'] = __('Ricevuta Fiscale o Fattura', 'mdt_wc_easy_cf_piva');
-            $opts['checkout_field']  = __('Codice Fiscale o Partita IVA', 'mdt_wc_easy_cf_piva');
-            $opts['profile_field']   = __('CF o PIVA', 'mdt_wc_easy_cf_piva');
-            $opts['order_field']     = __('CF o Partita Iva', 'mdt_wc_easy_cf_piva');
-            $opts['order_select']    = __('Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva');
-            $opts['settings_field']  = __('CF o PIVA', 'mdt_wc_easy_cf_piva');
-            $opts['settings_select'] = __('Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva');
+	/**
+	 * Activation register.
+	 *
+	 * On activation, if the plugin options exixts, assign default values.
+	 *
+	 * @since    1.0.1
+	 */
+	public static function activate() {
+		if ( ! get_option( 'mdt_wc_easy_cf_piva_options' ) ) {
 
-            add_option('mdt_wc_easy_cf_piva_options', $opts);
-        }
-    }
+			$opts['checkout_select'] = __( 'Ricevuta Fiscale o Fattura', 'mdt_wc_easy_cf_piva' );
+			$opts['checkout_field']  = __( 'Codice Fiscale o Partita IVA', 'mdt_wc_easy_cf_piva' );
+			$opts['profile_field']   = __( 'CF o PIVA', 'mdt_wc_easy_cf_piva' );
+			$opts['order_field']     = __( 'CF o Partita Iva', 'mdt_wc_easy_cf_piva' );
+			$opts['order_select']    = __( 'Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva' );
+			$opts['settings_field']  = __( 'CF o PIVA', 'mdt_wc_easy_cf_piva' );
+			$opts['settings_select'] = __( 'Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva' );
+
+			add_option( 'mdt_wc_easy_cf_piva_options', $opts );
+		}
+	}
 }
