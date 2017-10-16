@@ -306,12 +306,12 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 
 		global $wp_query;
 
-		if ( isset( $wp_query->query_vars['edit-address'] ) && $wp_query->query_vars['edit-address'] != 'fatturazione' ) {
+		if ( isset( $wp_query->query_vars['edit-address'] ) && ( 'fatturazione' != $wp_query->query_vars['edit-address'] ) ) {
 			// If we aren't on edit mode don't do nothing.
 			return $address;
 		}
 
-		// Compatibility check: in old version 1.0.0 need serialization
+		// Compatibility check: in old version 1.0.0 need serialization.
 		$options = get_option( 'mdt_wc_easy_cf_piva_options' );
 		$opts = is_serialized( $options ) ? unserialize( $options ) : $options;
 
@@ -331,7 +331,7 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 				'type'        => 'select',
 				'label'       => __( 'Tipo Emissione', 'wp_cf_piva' ),
 				'placeholder' => _x( 'Tipo Emissione', 'placeholder', 'wp_cf_piva' ),
-				'required'    => true, // change to false if you do not need this field to be required
+				'required'    => true, // Change to false if you do not need this field to be required.
 				'class'       => array( 'form-row-first' ),
 				'value'       => get_user_meta( get_current_user_id(), 'billing_ricfatt', true ),
 			);
@@ -349,9 +349,8 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 	 *
 	 * @since    1.0.1
 	 * @access   public
-	 * @param    object $fields Billing fields
-	 * @param    int    $customer_id Order referenced
-	 * @param    string $type Type of fields (billing or shipping)
+	 * @param    string $address User billing address.
+	 * @param    array  $args Array of parameters.
 	 * @return   object $fields Billing fields
 	 **/
 	public function mdt_wc_easy_cf_piva_formatted_address_replacements( $address, $args ) {
@@ -359,7 +358,7 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 			$this->log->debug( 'Updating CF PIVA and type address fields value in WooCommerce profile page [ address :: ' . var_export( $address, true ) . ' ][ args :: ' . var_export( $args, true ) . ' ]...' );
 		}
 
-		// Compatibility check: in old version 1.0.0 need serialization
+		// Compatibility check: in old version 1.0.0 need serialization.
 		$options = get_option( 'mdt_wc_easy_cf_piva_options' );
 		$opts = is_serialized( $options ) ? unserialize( $options ) : $options;
 
@@ -370,7 +369,7 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 
 		if ( in_array( 'customer', (array) $user->roles ) ) {
 			// $address['{ssn}'] = '';
-			if ( ! empty( $args['cfpiva'] ) && ! empty( $args['ricfatt'] ) && $args['ricfatt'] == 'FATTURA' ) {
+			if ( ! empty( $args['cfpiva'] ) && ! empty( $args['ricfatt'] ) && ( 'FATTURA' == $args['ricfatt'] ) ) {
 				$address['{cfpiva}'] = $opts['profile_field'] . ' ' . $args['cfpiva'];
 			}
 		}
@@ -387,7 +386,7 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 		 *
 		 * @since    1.0.0
 		 * @access   public
-		 * @param    object $formats
+		 * @param    object $formats User info.
 		 * @return   object $formats
 		 **/
 	public function mdt_wc_easy_cf_piva_localization_address_format( $formats ) {

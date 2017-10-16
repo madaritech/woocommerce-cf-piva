@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The plugin bootstrap file
  *
@@ -26,40 +25,38 @@
  */
 
 // If this file is called directly, abort.
-if (! defined('WPINC')) {
-    die;
+if ( ! defined( 'WPINC' ) ) {
+	die;
 }
 
-define('PLUGIN_VERSION', '1.0.1');
+define( 'PLUGIN_VERSION', '1.0.1' );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-mdt-wc-easy-cf-piva-activator.php
  */
-function activate_mdt_wc_easy_cf_piva()
-{
-    require_once plugin_dir_path(__FILE__) . 'includes/class-mdt-wc-easy-cf-piva-activator.php';
-    Mdt_Wc_Easy_Cf_Piva_Activator::activate();
+function activate_mdt_wc_easy_cf_piva() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-mdt-wc-easy-cf-piva-activator.php';
+	Mdt_Wc_Easy_Cf_Piva_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-mdt-wc-easy-cf-piva-deactivator.php
  */
-function deactivate_mdt_wc_easy_cf_piva()
-{
-    require_once plugin_dir_path(__FILE__) . 'includes/class-mdt-wc-easy-cf-piva-deactivator.php';
-    Mdt_Wc_Easy_Cf_Piva_Deactivator::deactivate();
+function deactivate_mdt_wc_easy_cf_piva() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-mdt-wc-easy-cf-piva-deactivator.php';
+	Mdt_Wc_Easy_Cf_Piva_Deactivator::deactivate();
 }
 
-register_activation_hook(__FILE__, 'activate_mdt_wc_easy_cf_piva');
-register_deactivation_hook(__FILE__, 'deactivate_mdt_wc_easy_cf_piva');
+register_activation_hook( __FILE__, 'activate_mdt_wc_easy_cf_piva' );
+register_deactivation_hook( __FILE__, 'deactivate_mdt_wc_easy_cf_piva' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path(__FILE__) . 'includes/class-mdt-wc-easy-cf-piva.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-mdt-wc-easy-cf-piva.php';
 
 /**
  * Begins execution of the plugin.
@@ -70,9 +67,8 @@ require plugin_dir_path(__FILE__) . 'includes/class-mdt-wc-easy-cf-piva.php';
  *
  * @since    1.0.0
  */
-function run_mdt_wc_easy_cf_piva()
-{
-    $plugin = new Mdt_Wc_Easy_Cf_Piva();
-    $plugin->run();
+function run_mdt_wc_easy_cf_piva() {
+	$plugin = new Mdt_Wc_Easy_Cf_Piva();
+	$plugin->run();
 }
 run_mdt_wc_easy_cf_piva();
