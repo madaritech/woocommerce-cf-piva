@@ -167,7 +167,7 @@ class Mdt_Wc_Easy_Cf_Piva {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'mdt_wc_easy_cf_piva_admin_menu' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'mdt_wc_easy_cf_piva_settings_init' );
 
-				$this->loader->add_filter( 'woocommerce_admin_billing_fields', $plugin_admin, 'mdt_wc_easy_cf_piva_admin_billing_fields' );
+		$this->loader->add_filter( 'woocommerce_admin_billing_fields', $plugin_admin, 'mdt_wc_easy_cf_piva_admin_billing_fields' );
 		$this->loader->add_filter( 'woocommerce_customer_meta_fields', $plugin_admin, 'mdt_wc_easy_cf_piva_customer_meta_fields' );
 	}
 

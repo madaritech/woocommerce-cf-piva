@@ -38,7 +38,4 @@ class Mdt_Wc_Easy_Cf_Piva_i18n {
 		);
 
 	}
-
-
-
 }
