@@ -114,8 +114,13 @@ class Mdt_Wc_Easy_Cf_Piva_Log_Service {
 	 *
 	 * @param string $level   The debug level.
 	 * @param string $message The message.
+	 * @param bool   $override True if the logger print the message without check if the debug is enabled on wp-config.
 	 */
-	private function log( $level, $message ) {
-		error_log( sprintf( '%-6s [%-40s] %s', $level, $this->class_name, $message ) );
+	private function log( $level, $message, $override ) {
+		if ( $override ) {
+			error_log( sprintf( '%-6s [%-40s] %s', $level, $this->class_name, $message ) );
+		} elseif ( $this->is_enabled() ) {
+			error_log( sprintf( '%-6s [%-40s] %s', $level, $this->class_name, $message ) );
+		}
 	}
 }

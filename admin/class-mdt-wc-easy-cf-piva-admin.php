@@ -208,9 +208,8 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 	 * @return   object $fields Billing fields
 	 **/
 	public function mdt_wc_easy_cf_piva_customer_meta_fields( $fields ) {
-		if ( Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled() ) {
-			$this->log->debug( 'Setting customer meta fields [ fields :: ' . var_export( $fields, true ) . ' ]...' );
-		}
+
+		$this->log->debug( 'Setting customer meta fields [ fields :: ' . var_export( $fields, true ) . ' ]...' );
 
 		// Compatibility check: in old version 1.0.0 need serialization.
 		$options = get_option( 'mdt_wc_easy_cf_piva_options' );
@@ -236,9 +235,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 			),
 		);
 
-		if ( Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled() ) {
-			$this->log->debug( 'Set customer meta fields [ fields :: ' . var_export( $fields, true ) . ' ]...' );
-		}
+		$this->log->debug( 'Set customer meta fields [ fields :: ' . var_export( $fields, true ) . ' ]...' );
 
 		return $fields;
 	}
@@ -252,9 +249,8 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 	 * @return   object $fields Billing fields
 	 **/
 	public function mdt_wc_easy_cf_piva_admin_billing_fields( $fields ) {
-		if ( Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled() ) {
-			$this->log->debug( 'Setting labels [ fields :: ' . var_export( $fields, true ) . ' ]...' );
-		}
+
+		$this->log->debug( 'Setting labels [ fields :: ' . var_export( $fields, true ) . ' ]...' );
 
 		// Compatibility check: in old version 1.0.0 need serialization.
 		$options = get_option( 'mdt_wc_easy_cf_piva_options' );
@@ -270,9 +266,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 			'show'  => true,
 		);
 
-		if ( Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled() ) {
-			$this->log->debug( 'Labels set [ fields :: ' . var_export( $fields, true ) . ' ]...' );
-		}
+		$this->log->debug( 'Labels set [ fields :: ' . var_export( $fields, true ) . ' ]...' );
 
 		return $fields;
 	}
@@ -284,9 +278,9 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 	 * @access public
 	 */
 	public function language_admin_notice() {
-		if ( Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled() ) {
-			$this->log->debug( 'Language check...' );
-		}
+
+		$this->log->debug( 'Language check...' );
+
 		$lang = get_locale();
 
 		if ( 'it_IT' != $lang ) :
@@ -307,8 +301,6 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 <?php
 		endif;
 
-		if ( Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled() ) {
-			$this->log->debug( "Language checked [ lang :: $lang ]..." );
-		}
+		$this->log->debug( "Language checked [ lang :: $lang ]..." );
 	}
 }

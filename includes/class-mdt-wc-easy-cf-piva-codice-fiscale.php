@@ -57,13 +57,13 @@ class Mdt_Wc_Easy_Cf_Piva_Codice_Fiscale {
 	 *
 	 * @since    1.0.0
 	 * @access   public
+	 * @return string Codice Fiscale verified.
 	 */
 	public function verify() {
-		if ( Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled() ) {
-			$this->log->debug( "Verifing Codice Fiscale [ codice_fiscale :: $this->codice_fiscale ]..." );
-		}
 
-		if ( ! empty( $this->codice_fiscale ) && strlen( $this->codice_fiscale ) == 16 ) {
+		$this->log->debug( "Verifing Codice Fiscale [ codice_fiscale :: $this->codice_fiscale ]..." );
+
+		if ( ! empty( $this->codice_fiscale ) && (  16 == strlen( $this->codice_fiscale ) ) ) {
 			return ctype_alnum( $this->codice_fiscale );
 		}
 	}

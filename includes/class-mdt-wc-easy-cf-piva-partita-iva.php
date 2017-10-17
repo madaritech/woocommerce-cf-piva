@@ -45,6 +45,7 @@ class Mdt_Wc_Easy_Cf_Piva_Partita_Iva {
 	 *
 	 * Set the partita iva to work on.
 	 *
+	 * @param string $piva Partita Iva value.
 	 * @since    1.0.0
 	 */
 	public function __construct( $piva ) {
@@ -59,11 +60,10 @@ class Mdt_Wc_Easy_Cf_Piva_Partita_Iva {
 	 * @access   public
 	 */
 	public function verify() {
-		if ( Mdt_Wc_Easy_Cf_Piva_Log_Service::is_enabled() ) {
-			$this->log->debug( "Verifing Partita Iva [ partita iva :: $this->partita_iva ]..." );
-		}
 
-		if ( ! empty( $this->partita_iva ) && strlen( $this->partita_iva ) == 11 ) {
+		$this->log->debug( "Verifing Partita Iva [ partita iva :: $this->partita_iva ]..." );
+
+		if ( ! empty( $this->partita_iva ) && (  11 == strlen( $this->partita_iva ) ) ) {
 			return is_numeric( $this->partita_iva );
 		}
 	}
