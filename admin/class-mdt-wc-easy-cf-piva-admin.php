@@ -126,7 +126,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 		$description['settings_select'] = __( 'Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'mdt_wc_easy_cf_piva' );
 
 		foreach ( $placeholder as $setting_key => $plc_value ) {
-			$value = isset( $setting[ $setting_key ] ) ? esc_attr( $setting[ $setting_key ] ) : '';
+			$value = isset( $setting[ $setting_key ] ) ? $setting[ $setting_key ] : '';
 
 			// Register a new field in the "mdt_wc_easy_cf_piva_settings_section" section, inside the "mdt_wc_easy_cf_piva_settings_page".
 			add_settings_field(
