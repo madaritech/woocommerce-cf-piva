@@ -249,15 +249,20 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 			'description' => __( 'Partita Iva o Codice Fiscale associato', 'mdt_wc_easy_cf_piva' ),
 		);
 
-		$fields['billing']['fields']['billing_ricfatt'] = array(
-			'type'        => 'select',
-			'label'       => $opts['settings_select'],
-			'description' => __( 'Tipo di ricevuta per il cliente', 'mdt_wc_easy_cf_piva' ),
-			'options'   => array(
-				'RICEVUTA' => 'Ricevuta',
-				'FATTURA' => 'Fattura',
-			),
-		);
+		// Check that the select menu is not disabled on the plugin settings page.
+		if ( empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
+
+			$fields['billing']['fields']['billing_ricfatt'] = array(
+				'type'        => 'select',
+				'label'       => $opts['settings_select'],
+				'description' => __( 'Tipo di ricevuta per il cliente', 'mdt_wc_easy_cf_piva' ),
+				'options'   => array(
+					'RICEVUTA' => 'Ricevuta',
+					'FATTURA' => 'Fattura',
+				),
+			);
+
+		}
 
 		$this->log->debug( 'Set customer meta fields [ fields :: ' . var_export( $fields, true ) . ' ]...' );
 
@@ -285,10 +290,15 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 			'show'  => true,
 		);
 
-		$fields['ricfatt'] = array(
-			'label' => $opts['order_select'], // __('Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva'),
-			'show'  => true,
-		);
+		// Check that the select menu is not disabled on the plugin settings page.
+		if ( empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
+
+			$fields['ricfatt'] = array(
+				'label' => $opts['order_select'], // __('Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva'),
+				'show'  => true,
+			);
+
+		}
 
 		$this->log->debug( 'Labels set [ fields :: ' . var_export( $fields, true ) . ' ]...' );
 
