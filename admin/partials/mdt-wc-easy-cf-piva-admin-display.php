@@ -93,14 +93,21 @@ submit_button( 'Salva le modifiche' );
 								<li>
 									<p>
 
-<?php esc_attr_e( 'Nel caso il cliente selezioni la fattura, al checkout viene aggiunto un apposito campo obbligatorio nel quale il cliente può specificare la Partita Iva o il Codice Fiscale', 'mdt_wc_easy_cf_piva' ); ?>
+<?php esc_attr_e( 'Nel caso il cliente selezioni la fattura, al checkout viene aggiunto un campo obbligatorio nel quale il cliente può specificare la Partita Iva o il Codice Fiscale', 'mdt_wc_easy_cf_piva' ); ?>
 
 										</p>
 								</li>
 								<li>
 									<p>
 
-<?php esc_attr_e( 'Nel caso il cliente selezioni la fattura, nell\'ordine verrà specificata la scelta operata e il valore del Codice Fiscale e/o della Partita Iva', 'mdt_wc_easy_cf_piva' ); ?>
+<?php esc_attr_e( 'Nel caso il cliente selezioni la fattura, nell\'ordine viene specificata la scelta operata e il valore del Codice Fiscale e/o della Partita Iva', 'mdt_wc_easy_cf_piva' ); ?>
+
+									</p>
+								</li>
+								<li>
+									<p>
+
+<?php esc_attr_e( 'Il menù a tendina può essere opzionalmente disabilitato nelle impostazioni del plugin: in tal caso il campo nel quale il cliente può specificare la Partita Iva o il Codice Fiscale viene sempre mostrato e la sua compilazione è obbligatoria per la riuscita dell\'ordine', 'mdt_wc_easy_cf_piva' ); ?>
 
 									</p>
 								</li>
