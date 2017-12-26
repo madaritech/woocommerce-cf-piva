@@ -86,7 +86,7 @@ submit_button( 'Salva le modifiche' );
 								<li>
 									<p>
 
-<?php esc_attr_e( 'Un menu a tendina permette al cliente di specificare il tipo di fatturazione: Ricevuta Fiscale o Fattura. Il menù a tendina può essere opzionalmente disabilitato nelle impostazioni del plugin: in tal caso il campo Codice Fiscale/Partita Iva viene sempre mostrato e la sua compilazione è obbligatoria per la riuscita dell\'ordine', 'mdt_wc_easy_cf_piva' ); ?>
+<?php esc_attr_e( 'Un menu a tendina permette al cliente di specificare il tipo di fatturazione: Ricevuta Fiscale o Fattura', 'mdt_wc_easy_cf_piva' ); ?>
 
 										</p>
 								</li>
@@ -101,6 +101,13 @@ submit_button( 'Salva le modifiche' );
 									<p>
 
 <?php esc_attr_e( 'Nel caso il cliente selezioni la fattura, nell\'ordine viene specificata la scelta operata e il valore del Codice Fiscale e/o della Partita Iva', 'mdt_wc_easy_cf_piva' ); ?>
+
+									</p>
+								</li>
+								<li>
+									<p>
+
+<?php esc_attr_e( 'Il menù a tendina può essere opzionalmente disabilitato nelle impostazioni del plugin: in tal caso il campo nel quale il cliente può specificare la Partita Iva o il Codice Fiscale viene sempre mostrato e la sua compilazione è obbligatoria per la riuscita dell\'ordine', 'mdt_wc_easy_cf_piva' ); ?>
 
 									</p>
 								</li>
