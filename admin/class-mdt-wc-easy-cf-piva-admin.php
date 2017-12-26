@@ -90,7 +90,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 		// Register a new section in the "mdt_wc_easy_cf_piva_settings_page" page.
 		add_settings_section(
 			'mdt_wc_easy_cf_piva_settings_section',
-			'<h2><strong>' . __( 'Imposta la modalità di utilizzo e configura le etichette dei campi che verranno visualizzati', 'mdt_wc_easy_cf_piva' ) . '</strong></h2>',
+			'<h2><strong>' . __( 'impostazioni di configurazione', 'mdt_wc_easy_cf_piva' ) . '</strong></h2>',
 			array( &$this, 'mdt_wc_easy_cf_piva_settings_section_cb' ),
 			'mdt_wc_easy_cf_piva_settings_page'
 		);
@@ -108,6 +108,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 		$placeholder['order_select']    = __( 'Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva' );
 		$placeholder['settings_field']  = __( 'CF o PIVA', 'mdt_wc_easy_cf_piva' );
 		$placeholder['settings_select'] = __( 'Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva' );
+		$placeholder['disable_select'] = '';
 
 		$label['checkout_select'] = __( 'Menù pagina Checkout', 'mdt_wc_easy_cf_piva' );
 		$label['checkout_field']  = __( 'Campo pagina Checkout', 'mdt_wc_easy_cf_piva' );
@@ -116,6 +117,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 		$label['order_select']    = __( 'Menù pagina Ordine', 'mdt_wc_easy_cf_piva' );
 		$label['settings_field']  = __( 'Campo pagina Utente', 'mdt_wc_easy_cf_piva' );
 		$label['settings_select'] = __( 'Menù pagina Utente', 'mdt_wc_easy_cf_piva' );
+		$label['disable_select'] = __( 'Disabilita Menù', 'mdt_wc_easy_cf_piva' );
 
 		$description['checkout_select'] = __( 'Etichetta visualizzata nel front-end, al checkout, per la selezione del tipo di dettaglio di fatturazione desiderato', 'mdt_wc_easy_cf_piva' );
 		$description['checkout_field']  = __( 'Etichetta visualizzata nel front-end, al checkout, per l\'inserimento del Codice Fiscale o della Partita Iva', 'mdt_wc_easy_cf_piva' );
@@ -124,43 +126,28 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 		$description['order_select']    = __( 'Etichetta visualizzata nel back-end dell\'ordine per il campo che mostra il tipo di dettaglio di fatturazione richiesto dal cliente', 'mdt_wc_easy_cf_piva' );
 		$description['settings_field']  = __( 'Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'mdt_wc_easy_cf_piva' );
 		$description['settings_select'] = __( 'Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'mdt_wc_easy_cf_piva' );
+		$description['disable_select'] = __( 'Seleziona la checkbox per nascondere il menù di scelta e visualizzare solamente il campo per il Codice Fiscale/Partita Iva', 'mdt_wc_easy_cf_piva' );
 
-		foreach ( $placeholder as $setting_key => $plc_value ) {
+		foreach ( $label as $setting_key => $lbl_value ) {
 			$value = isset( $setting[ $setting_key ] ) ? $setting[ $setting_key ] : '';
+
+			$callback = ( 'disable_select' == $setting_key) ? 'mdt_wc_easy_cf_piva_settings_field_select_disabled_cb' : 'mdt_wc_easy_cf_piva_settings_field_etichette_cb';
 
 			// Register a new field in the "mdt_wc_easy_cf_piva_settings_section" section, inside the "mdt_wc_easy_cf_piva_settings_page".
 			add_settings_field(
 				'mdt_wc_easy_cf_piva_settings_field' . $setting_key,
-				$label[ $setting_key ],
-				array( &$this, 'mdt_wc_easy_cf_piva_settings_field_cb' ),
+				$lbl_value,
+				array( &$this, $callback ),
 				'mdt_wc_easy_cf_piva_settings_page',
 				'mdt_wc_easy_cf_piva_settings_section',
 				[
 					'value' => $value,
 					'key' => $setting_key,
 					'desc' => $description[ $setting_key ],
-					'placeholder' => $plc_value,
+					'placeholder' => $placeholder[ $setting_key ],
 				]
 			);
 		}
-
-		// Register a new field in the "mdt_wc_easy_cf_piva_settings_section" section, inside the "mdt_wc_easy_cf_piva_settings_page": a field to disable the use of select box.
-		$value = isset( $setting['dis_sel'] ) ? $setting['dis_sel'] : '';
-		//$setting_key = 'dis_sel';
-
-		add_settings_field(
-			'mdt_wc_easy_cf_piva_settings_field_disable_select',
-			__( 'Disabilita menù', 'mdt_wc_easy_cf_piva' ),
-			array( &$this, 'mdt_wc_easy_cf_piva_settings_field_select_disabled_cb' ),
-			'mdt_wc_easy_cf_piva_settings_page',
-			'mdt_wc_easy_cf_piva_settings_section',
-			[
-				'value' => $value,
-				'key' => 'dis_sel',
-				'desc' => $description[ $setting_key ],
-				'placeholder' => $plc_value,
-			]
-		);
 	}
 
 	/**
@@ -177,6 +164,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 		$options_array['order_select'] = sanitize_text_field( $options_array['order_select'] );
 		$options_array['settings_field'] = sanitize_text_field( $options_array['settings_field'] );
 		$options_array['settings_select'] = sanitize_text_field( $options_array['settings_select'] );
+		$options_array['disable_select'] = sanitize_text_field( $options_array['disable_select'] );
 
 		return $options_array;
 	}
@@ -187,9 +175,9 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 	 * @since 1.0.1
 	 */
 	public function mdt_wc_easy_cf_piva_settings_section_cb() {
-		echo '<p>' . esc_html( __( 'Scegliendo la modalità di utilizzo è possibile disabilitare il menù a tendina di scelta "Ricevuta" o "Fattura": in tal caso verrà mantenuto il campo per l\'inserimento del Codice Fiscale o Partita IVA.', 'mdt_wc_easy_cf_piva' ) ) . '</p>';
 
-		echo '<p>' . esc_html( __( 'Se si desidera modificare inoltre i valori di default delle etichette per ciascun campo, utilizzare gli appositi campi.', 'mdt_wc_easy_cf_piva' ) ) . '</p>';
+		echo '<p>' . esc_html( __( 'Mediante i campi sotto riportati è possibile modificare i valori di default delle etichette. ', 'mdt_wc_easy_cf_piva' ) ) . '<br>' . esc_html( __( 'Il campo "Disabilita Menù" permette invece di disabilitare il menù a tendina di scelta "Ricevuta" o "Fattura": in tal caso verrà mantenuto solamente il campo per l\'inserimento del Codice Fiscale o Partita IVA.', 'mdt_wc_easy_cf_piva' ) ) . '</p>';
+
 	}
 
 	/**
@@ -198,7 +186,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 	 * @param array $args Parameters defined in the add_settings_field function call.
 	 * @since 1.0.1
 	 */
-	public function mdt_wc_easy_cf_piva_settings_field_cb( $args ) {
+	public function mdt_wc_easy_cf_piva_settings_field_etichette_cb( $args ) {
 		?>
 
 		<input type="text" name="mdt_wc_easy_cf_piva_options[<?php echo esc_attr( $args['key'] ); ?>]" placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>" value= "<?php echo esc_attr( $args['value'] ); ?>" class="regular-text" /><span class="description"><?php echo esc_attr( $args['desc'] ); ?></span><br></br>
@@ -210,14 +198,14 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 	 * The Admin Setting Field Callback for Disable Menù field.
 	 *
 	 * @param array $args Parameters defined in the add_settings_field function call.
-	 * @since 1.0.3
+	 * @since 1.1.0
 	 */
 	public function mdt_wc_easy_cf_piva_settings_field_select_disabled_cb( $args ) {
 		$checked = $args['value'];
 		$current = 'dis_sel_opt';
 		?>
 
-		<input type="checkbox" name="mdt_wc_easy_cf_piva_options[<?php echo esc_attr( $args['key'] ); ?>]" value="<?php echo esc_attr( $current ); ?>" class="regular-text" <?php checked( $checked, $current ); ?>/><span class="description"><?php echo esc_attr( $args['desc'] ); ?></span><br></br>
+		<input type="checkbox" name="mdt_wc_easy_cf_piva_options[<?php echo esc_attr( $args['key'] ); ?>]" value="<?php echo esc_attr( $current ); ?>" <?php checked( $checked, $current ); ?>/><span class="description"><?php echo esc_attr( $args['desc'] ); ?></span><br></br>
 
 	<?php
 	}
