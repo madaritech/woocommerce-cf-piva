@@ -4,8 +4,8 @@ Contributors: Madaritech
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9TZGG6437EUX6
 Tags: partita, iva, codice, fiscale, woocommerce, easy, italia
 Requires at least: 4.8
-Tested up to: 4.9
-Stable tag: 1.0.2
+Tested up to: 4.9.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Add the "Partita IVA" e "Codice Fiscale" fields in WooCommerce for the italian m
 
 == Description ==
 
-WC tested up to: 3.2.1
+WC tested up to: 3.2.6
 Requires at least: 3.1.2
 
 = Italiano =
@@ -28,6 +28,8 @@ Aggiunge i campi Partita Iva e Codice Fiscale in WooCommerce per realizzare un E
 
 * nel caso il cliente selezioni la ricevuta, il cliente non è tenuto ad inserire informazioni sul Codice Fiscale o la Partita Iva. L'ordine riporta tale scelta operata dal cliente
 
+* il menu a tendina può essere disabilitato dalla pagina delle impostazioni: in tal caso il tipo di fatturazione è sempre "Fattura", viene aggiunto un apposito campo obbligatorio nel quale il cliente può specificare la Partita Iva o il Codice Fiscale
+
 = English =
 
 Add the "Partita IVA" e "Codice Fiscale" fields in WooCommerce for the italian market. Different labels in the various sections (checkout page, order, etc.) can be configured quickly and easily. In detail:
@@ -37,6 +39,8 @@ Add the "Partita IVA" e "Codice Fiscale" fields in WooCommerce for the italian m
 * in case the customer selects the invoice, in the checkout a mandatory field is added, in which the customer can specify the VAT or the Tax Code
 
 * in case the customer selects the invoice, the order will specify the choice made and the value of the Tax Code and/or VAT Code
+
+* the drop-down menu can be disabled from the settings page: in this case the type of invoicing is always "Invoice", a mandatory field is added in which the customer can specify the VAT number or the Tax Code
 
 == Installation ==
 
@@ -54,7 +58,7 @@ This section describes how to install the plugin and get it working.
 
 == Screenshots ==
 
-1. Nella pagina delle impostazioni del plugin è possibile configurare le varie etichette.
+1. Nella pagina delle impostazioni del plugin è possibile configurare le varie etichette e/o disabilitare la il menu a tendina.
 
 2. Al checkout un menu a tendina permette di scegliere il tipo di fatturazione che si preferisce.
 
@@ -74,6 +78,9 @@ This section describes how to install the plugin and get it working.
 
 
 == Changelog ==
+
+= 1.1.0 =
+* Added checkbox to disable the drop-down menu and always show a mandatory field for the VAT number or the Tax Code
 
 = 1.0.1 =
 * Refactored settings page with Settings API and Options API
