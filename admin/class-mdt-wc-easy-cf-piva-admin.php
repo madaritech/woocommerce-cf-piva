@@ -190,7 +190,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 	 */
 	public function mdt_wc_easy_cf_piva_settings_section_cb() {
 
-		echo '<p>' . esc_html( __( 'Mediante i campi sotto riportati è possibile modificare i valori di default delle etichette. ', 'mdt_wc_easy_cf_piva' ) ) . '<br><br>' . esc_html( __( 'Il campo "Disabilita Menù", se attivato, permette di disabilitare il menù a tendina di scelta "Ricevuta" o "Fattura": in tal caso verrà mantenuto solamente il campo per l\'inserimento del Codice Fiscale o Partita IVA. La modalità applicata di default diviene "Fattura".', 'mdt_wc_easy_cf_piva' ) ) . '<br><br>' . esc_html( __( 'Il campo "Società obbligatoria", se attivato, permette di rendere obbligatorio l\'inserimento del Nome Società nel caso in cui sia selezionata la modalità "Fattura".', 'mdt_wc_easy_cf_piva' ) ) . '</p>';
+		echo '<ul><li>' . esc_html( __( 'Mediante i campi sotto riportati è possibile modificare i valori di default delle etichette. ', 'mdt_wc_easy_cf_piva' ) ) . '</li><li>' . esc_html( __( 'Il campo "Disabilita Menù", se attivato, permette di disabilitare il menù a tendina di scelta "Ricevuta" o "Fattura": in tal caso verrà mantenuto solamente il campo per l\'inserimento del Codice Fiscale o Partita IVA. La modalità applicata di default diviene "Fattura".', 'mdt_wc_easy_cf_piva' ) ) . '</li><li>' . esc_html( __( 'Il campo "Società obbligatoria", se attivato, permette di rendere obbligatorio l\'inserimento del Nome Società nel caso in cui sia selezionata la modalità "Fattura".', 'mdt_wc_easy_cf_piva' ) ) . '</li></ul>';
 
 	}
 
