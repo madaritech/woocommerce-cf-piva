@@ -8,3 +8,5 @@ Add the "Partita IVA" e "Codice Fiscale" fields in WooCommerce for the italian m
 * in case the customer selects the invoice, the order will specify the choice made and the value of the Tax Code and/or VAT Code
 
 * in the settings page is possible to disable the drop-down menu: in this case the billing type is always Invoice and a mandatory field is added
+
+* by means of a checkbox, from the settings page, the "Company Name" field can be made mandatory if the type of invoice selected is "Invoice"

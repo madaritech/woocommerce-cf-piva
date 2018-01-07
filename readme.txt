@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: partita, iva, codice, fiscale, woocommerce, easy, italia
 Requires at least: 4.8
 Tested up to: 4.9.1
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,7 @@ Requires at least: 3.1.2
 
 Aggiunge i campi Partita Iva e Codice Fiscale in WooCommerce per realizzare un Ecommerce per il mercato italiano. Le diverse etichette nelle varie sezioni (pagina di checkout, ordine, ecc.) possono essere configurate in modo rapido e semplice. Nel dettaglio:
 
-* un menu a tendina permette al cliente di specificare il tipo di fatturazione: Ricevuta Fiscale o Fattura
+* un menu a tendina permette al cliente di specificare il tipo di fatturazione: "Ricevuta Fiscale" o "Fattura"
 
 * nel caso il cliente selezioni la fattura, al checkout viene aggiunto un apposito campo obbligatorio nel quale il cliente può specificare la Partita Iva o il Codice Fiscale
 
@@ -30,17 +30,21 @@ Aggiunge i campi Partita Iva e Codice Fiscale in WooCommerce per realizzare un E
 
 * il menu a tendina può essere disabilitato dalla pagina delle impostazioni: in tal caso il tipo di fatturazione è sempre "Fattura", viene aggiunto un apposito campo obbligatorio nel quale il cliente può specificare la Partita Iva o il Codice Fiscale
 
+* mediante apposita checkbox, dalla pagina delle impostazioni, il campo "Nome della Società" può essere reso obbligatorio nel caso il tipo di fatturazione selezionata sia "Fattura"
+
 = English =
 
 Add the "Partita IVA" e "Codice Fiscale" fields in WooCommerce for the italian market. Different labels in the various sections (checkout page, order, etc.) can be configured quickly and easily. In detail:
 
-* a drop-down menu allows the customer to specify the billing type: Receipt Tax or Invoice
+* a drop-down menu allows the customer to specify the billing type: "Receipt Tax" or "Invoice"
 
 * in case the customer selects the invoice, in the checkout a mandatory field is added, in which the customer can specify the VAT or the Tax Code
 
 * in case the customer selects the invoice, the order will specify the choice made and the value of the Tax Code and/or VAT Code
 
 * the drop-down menu can be disabled from the settings page: in this case the type of invoicing is always "Invoice", a mandatory field is added in which the customer can specify the VAT number or the Tax Code
+
+* by means of a checkbox, from the settings page, the "Company Name" field can be made mandatory if the type of invoice selected is "Invoice"
 
 == Installation ==
 
@@ -79,6 +83,9 @@ This section describes how to install the plugin and get it working.
 
 == Changelog ==
 
+= 1.2.0 =
+* Added checkbox to make compulsory the Company Name field
+
 = 1.1.0 =
 * Added checkbox to disable the drop-down menu and always show a mandatory field for the VAT number or the Tax Code
 
@@ -89,6 +96,9 @@ This section describes how to install the plugin and get it working.
 * First release
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+* Corrected bugs on the previous version. Update immediately.
 
 = 1.0.1 =
 * Improved security using standard WP function to manage plugin settings
