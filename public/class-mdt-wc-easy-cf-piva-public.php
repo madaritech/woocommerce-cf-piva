@@ -77,7 +77,7 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 		$opts = is_serialized( $options ) ? unserialize( $options ) : $options;
 
 		// Check that the select menu is not disabled on the plugin settings page.
-		if ( empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
+		if ( ! isset( $opts['disable_select'] ) || empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
 
 			$fields['billing_ricfatt'] = array(
 				'type'      => 'select',
@@ -91,7 +91,6 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 					'FATTURA' => 'Fattura',
 				),
 			);
-
 		}
 
 		$fields['billing_cfpiva'] = array(
@@ -118,7 +117,23 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 
 		$this->log->debug( 'Enqueueing js for show/hide CF PIVA field...' );
 
-		wp_enqueue_script( 'select_show_hide_cf_piva_field', plugin_dir_url( __FILE__ ) . 'js/mdt-wc-easy-cf-piva-public.js', array( 'jquery' ), $this->version, true );
+		// Register the script.
+		wp_register_script( 'select_show_hide_cf_piva_field', plugin_dir_url( __FILE__ ) . 'js/mdt-wc-easy-cf-piva-public.js' );
+
+		// Compatibility check: in old version 1.0.0 need serialization.
+		$options = get_option( 'mdt_wc_easy_cf_piva_options' );
+		$opts = is_serialized( $options ) ? unserialize( $options ) : $options;
+
+		// Localize the script with new data.
+		$opt_array = array(
+			'disable_select' => isset( $opts['disable_select'] ) ? $opts['disable_select'] : '',
+			'compulsory_company' => isset( $opts['compulsory_company'] ) ? $opts['compulsory_company'] : '',
+		);
+
+		wp_localize_script( 'select_show_hide_cf_piva_field', 'opts', $opt_array );
+
+		// Enqueued script with localized data.
+		wp_enqueue_script( 'select_show_hide_cf_piva_field' );
 
 		$this->log->debug( 'Enqueued js for show/hide CF PIVA field...' );
 	}
@@ -137,8 +152,12 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 		$ricfatt = '';
 		$cfpiva = '';
 
+		// Compatibility check: in old version 1.0.0 need serialization.
+		$options = get_option( 'mdt_wc_easy_cf_piva_options' );
+		$opts = is_serialized( $options ) ? unserialize( $options ) : $options;
+
 		// Check that the select menu is not disabled on the plugin settings page.
-		if ( empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
+		if ( ! isset( $opts['disable_select'] ) || empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
 
 			if ( isset( $_POST['billing_ricfatt'] ) ) {
 				$ricfatt = sanitize_text_field( wp_unslash( $_POST['billing_ricfatt'] ) );
@@ -180,11 +199,30 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 			}
 
 			if ( ! empty( $message ) ) {
-				wc_add_notice( '<strong>' . __( 'Codice Fiscale o Partita IVA' ) . '</strong> ' . $message, 'error' );
+				wc_add_notice( '<strong>' . __( 'Fatturazione Codice Fiscale o Partita IVA' ) . '</strong> ' . $message, 'error' );
 			}
 		}
 
 		$this->log->debug( 'Validated CF PIVA field...' );
+
+		// Check that the company compulsory is enabled on the plugin settings page.
+		if ( isset( $opts['compulsory_company'] ) && 'com_com' == $opts['compulsory_company'] ) {
+
+			$this->log->debug( 'Validating Company field...' );
+
+			if ( isset( $_POST['billing_company'] ) ) {
+				$billing_company = sanitize_text_field( wp_unslash( $_POST['billing_company'] ) );
+			}
+
+			if ( ! empty( $ricfatt ) && ('FATTURA' == $ricfatt ) ) {
+				if ( ! isset( $billing_company ) || empty( $billing_company ) ) {
+					$message = __( ' è un campo obbligatorio.', 'mdt_wc_easy_cf_piva' );
+					wc_add_notice( '<strong>' . __( 'Fatturazione Nome della società' ) . '</strong> ' . $message, 'error' );
+				}
+			}
+
+			$this->log->debug( 'Validated Company field...' );
+		}
 	}
 
 	/**
@@ -201,8 +239,12 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 		$ricfatt = '';
 		$cfpiva = '';
 
+		// Compatibility check: in old version 1.0.0 need serialization.
+		$options = get_option( 'mdt_wc_easy_cf_piva_options' );
+		$opts = is_serialized( $options ) ? unserialize( $options ) : $options;
+
 		// Check that the select menu is not disabled on the plugin settings page.
-		if ( empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
+		if ( ! isset( $opts['disable_select'] ) || empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
 
 			if ( isset( $_POST['billing_ricfatt'] ) ) {
 				$ricfatt = sanitize_text_field( wp_unslash( $_POST['billing_ricfatt'] ) );
@@ -234,8 +276,12 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 		$ricfatt = '';
 		$cfpiva = '';
 
+		// Compatibility check: in old version 1.0.0 need serialization.
+		$options = get_option( 'mdt_wc_easy_cf_piva_options' );
+		$opts = is_serialized( $options ) ? unserialize( $options ) : $options;
+
 		// Check that the select menu is not disabled on the plugin settings page.
-		if ( empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
+		if ( ! isset( $opts['disable_select'] ) || empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
 
 			if ( $user_id && isset( $_POST['billing_ricfatt'] ) ) {
 				$ricfatt = sanitize_text_field( wp_unslash( $_POST['billing_ricfatt'] ) );
@@ -267,8 +313,12 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 
 		$this->log->debug( 'Updating CF PIVA and type fields value from order [ fields :: ' . var_export( $fields, true ) . ' ][ order :: ' . var_export( $order, true ) . ' ]...' );
 
+		// Compatibility check: in old version 1.0.0 need serialization.
+		$options = get_option( 'mdt_wc_easy_cf_piva_options' );
+		$opts = is_serialized( $options ) ? unserialize( $options ) : $options;
+
 		// Check that the select menu is not disabled on the plugin settings page.
-		if ( empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
+		if ( ! isset( $opts['disable_select'] ) || empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
 			$fields['ricfatt'] = get_post_meta( $order->get_id(), '_billing_ricfatt', true );
 
 			$this->log->debug( 'Updated type field value from order [ ricfatt :: ' . $fields['ricfatt'] . ' ]...' );
@@ -295,11 +345,15 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 
 		$this->log->debug( 'Updating CF PIVA and type fields value from user meta [ fields :: ' . var_export( $fields, true ) . " ][ customer_id ::  $customer_id ][ type ::  $type ]..." );
 
+		// Compatibility check: in old version 1.0.0 need serialization.
+		$options = get_option( 'mdt_wc_easy_cf_piva_options' );
+		$opts = is_serialized( $options ) ? unserialize( $options ) : $options;
+
 		if ( 'billing' == $type ) {
 			$fields['cfpiva'] = get_user_meta( $customer_id, 'billing_cfpiva', true );
 
 			// Check that the select menu is not disabled on the plugin settings page.
-			if ( empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
+			if ( ! isset( $opts['disable_select'] ) || empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
 
 				$fields['ricfatt'] = get_user_meta( $customer_id, 'billing_ricfatt', true );
 			}
@@ -345,7 +399,7 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 		}
 
 		// Check that the select menu is not disabled on the plugin settings page.
-		if ( empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
+		if ( ! isset( $opts['disable_select'] ) || empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
 
 			if ( ! isset( $address['billing_ricfatt'] ) ) {
 				$address['billing_ricfatt'] = array(
@@ -394,7 +448,7 @@ class Mdt_Wc_Easy_Cf_Piva_Public {
 			if ( ! empty( $args['cfpiva'] ) ) {
 
 				// Check that the select menu is not disabled on the plugin settings page.
-				if ( empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
+				if ( ! isset( $opts['disable_select'] ) || empty( $opts['disable_select'] ) || ( 'dis_sel_opt' != $opts['disable_select'] ) ) {
 
 					if ( ! empty( $args['ricfatt'] ) && ( 'FATTURA' == $args['ricfatt'] ) ) {
 						$address['{cfpiva}'] = $opts['profile_field'] . ' ' . $args['cfpiva'];
