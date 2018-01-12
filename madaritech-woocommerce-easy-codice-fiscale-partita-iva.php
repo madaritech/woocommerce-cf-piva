@@ -15,7 +15,7 @@
  * Plugin Name:       WooCommerce Easy Codice Fiscale Partita Iva
  * Plugin URI:        http://www.madaritech.com/mdt-wc-easy-cf-piva
  * Description:       Add the "Partita IVA" e "Codice Fiscale" fields in WooCommerce for the italian market.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Author:            Madaritech
  * Author URI:        http://www.madaritech.com
  * License:           GPL-2.0+
@@ -29,7 +29,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'PLUGIN_VERSION', '1.0.2' );
+define( 'PLUGIN_VERSION', '1.2.0' );
 
 /**
  * The code that runs during plugin activation.

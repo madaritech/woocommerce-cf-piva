@@ -109,6 +109,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 		$placeholder['settings_field']  = __( 'CF o PIVA', 'mdt_wc_easy_cf_piva' );
 		$placeholder['settings_select'] = __( 'Tipo Emissione Richiesta', 'mdt_wc_easy_cf_piva' );
 		$placeholder['disable_select'] = '';
+		$placeholder['compulsory_company'] = '';
 
 		$label['checkout_select'] = __( 'Menù pagina Checkout', 'mdt_wc_easy_cf_piva' );
 		$label['checkout_field']  = __( 'Campo pagina Checkout', 'mdt_wc_easy_cf_piva' );
@@ -118,6 +119,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 		$label['settings_field']  = __( 'Campo pagina Utente', 'mdt_wc_easy_cf_piva' );
 		$label['settings_select'] = __( 'Menù pagina Utente', 'mdt_wc_easy_cf_piva' );
 		$label['disable_select'] = __( 'Disabilita Menù', 'mdt_wc_easy_cf_piva' );
+		$label['compulsory_company'] = __( 'Società obbligatoria', 'mdt_wc_easy_cf_piva' );
 
 		$description['checkout_select'] = __( 'Etichetta visualizzata nel front-end, al checkout, per la selezione del tipo di dettaglio di fatturazione desiderato', 'mdt_wc_easy_cf_piva' );
 		$description['checkout_field']  = __( 'Etichetta visualizzata nel front-end, al checkout, per l\'inserimento del Codice Fiscale o della Partita Iva', 'mdt_wc_easy_cf_piva' );
@@ -127,11 +129,22 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 		$description['settings_field']  = __( 'Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'mdt_wc_easy_cf_piva' );
 		$description['settings_select'] = __( 'Etichetta visualizzata nel back-end nella sezione dei Settings degli utenti WordPress', 'mdt_wc_easy_cf_piva' );
 		$description['disable_select'] = __( 'Seleziona la checkbox per nascondere il menù di scelta e visualizzare solamente il campo per il Codice Fiscale/Partita Iva', 'mdt_wc_easy_cf_piva' );
+		$description['compulsory_company'] = __( 'Seleziona la checkbox per rendere obbligatorio il campo con Nome Società nel caso si selezioni la modalità Fattura', 'mdt_wc_easy_cf_piva' );
 
 		foreach ( $label as $setting_key => $lbl_value ) {
 			$value = isset( $setting[ $setting_key ] ) ? $setting[ $setting_key ] : '';
 
-			$callback = ( 'disable_select' == $setting_key) ? 'mdt_wc_easy_cf_piva_settings_field_select_disabled_cb' : 'mdt_wc_easy_cf_piva_settings_field_etichette_cb';
+			switch ( $setting_key ) {
+				case 'disable_select':
+					$callback = 'mdt_wc_easy_cf_piva_settings_field_checkbox_cb';
+					break;
+				case 'compulsory_company':
+					$callback = 'mdt_wc_easy_cf_piva_settings_field_checkbox_cb';
+					break;
+				default:
+					$callback = 'mdt_wc_easy_cf_piva_settings_field_etichette_cb';
+					break;
+			}
 
 			// Register a new field in the "mdt_wc_easy_cf_piva_settings_section" section, inside the "mdt_wc_easy_cf_piva_settings_page".
 			add_settings_field(
@@ -165,6 +178,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 		$options_array['settings_field'] = sanitize_text_field( $options_array['settings_field'] );
 		$options_array['settings_select'] = sanitize_text_field( $options_array['settings_select'] );
 		$options_array['disable_select'] = sanitize_text_field( $options_array['disable_select'] );
+		$options_array['compulsory_company'] = sanitize_text_field( $options_array['compulsory_company'] );
 
 		return $options_array;
 	}
@@ -176,7 +190,7 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 	 */
 	public function mdt_wc_easy_cf_piva_settings_section_cb() {
 
-		echo '<p>' . esc_html( __( 'Mediante i campi sotto riportati è possibile modificare i valori di default delle etichette. ', 'mdt_wc_easy_cf_piva' ) ) . '<br>' . esc_html( __( 'Il campo "Disabilita Menù" permette invece di disabilitare il menù a tendina di scelta "Ricevuta" o "Fattura": in tal caso verrà mantenuto solamente il campo per l\'inserimento del Codice Fiscale o Partita IVA.', 'mdt_wc_easy_cf_piva' ) ) . '</p>';
+		echo '<ul><li>' . esc_html( __( 'Mediante i campi sotto riportati è possibile modificare i valori di default delle etichette. ', 'mdt_wc_easy_cf_piva' ) ) . '</li><li>' . esc_html( __( 'Il campo "Disabilita Menù", se attivato, permette di disabilitare il menù a tendina di scelta "Ricevuta" o "Fattura": in tal caso verrà mantenuto solamente il campo per l\'inserimento del Codice Fiscale o Partita IVA. La modalità applicata di default diviene "Fattura".', 'mdt_wc_easy_cf_piva' ) ) . '</li><li>' . esc_html( __( 'Il campo "Società obbligatoria", se attivato, permette di rendere obbligatorio l\'inserimento del Nome Società nel caso in cui sia selezionata la modalità "Fattura".', 'mdt_wc_easy_cf_piva' ) ) . '</li></ul>';
 
 	}
 
@@ -195,14 +209,14 @@ class Mdt_Wc_Easy_Cf_Piva_Admin {
 	}
 
 	/**
-	 * The Admin Setting Field Callback for Disable Menù field.
+	 * The Admin Setting Field Callback for checkbox used by Disable Menù field and Compulsory Company field.
 	 *
 	 * @param array $args Parameters defined in the add_settings_field function call.
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
-	public function mdt_wc_easy_cf_piva_settings_field_select_disabled_cb( $args ) {
+	public function mdt_wc_easy_cf_piva_settings_field_checkbox_cb( $args ) {
 		$checked = $args['value'];
-		$current = 'dis_sel_opt';
+		$current = ( 'compulsory_company' == $args['key'] ) ? 'com_com' : 'dis_sel_opt';
 		?>
 
 		<input type="checkbox" name="mdt_wc_easy_cf_piva_options[<?php echo esc_attr( $args['key'] ); ?>]" value="<?php echo esc_attr( $current ); ?>" <?php checked( $checked, $current ); ?>/><span class="description"><?php echo esc_attr( $args['desc'] ); ?></span><br></br>

@@ -128,7 +128,7 @@ submit_button( 'Salva le modifiche' );
 						<div class="inside">
 							<p>
 
-<?php esc_attr_e( 'Questo plugin è completamente gratuito. Aiutami a migliorarlo con versioni sempre più aggiornate e ad implementare nuove funzionalità. Puoi contribuire con una recensione e\o una donazione. Per domande o suggerimenti puoi lasciare un messaggio nella seguente form: ', 'mdt_wc_easy_cf_piva' ); ?>
+<?php esc_attr_e( 'Questo plugin è completamente gratuito. Aiutaci a migliorarlo con versioni sempre più aggiornate e ad implementare nuove funzionalità. Puoi contribuire con una recensione e\o una donazione. Per domande o suggerimenti puoi lasciare un messaggio nella seguente form: ', 'mdt_wc_easy_cf_piva' ); ?>
 
 							<a href="http://www.madaritech.com/#menu-contact" target="_blank">Madaritech contact form</a></p>
 
