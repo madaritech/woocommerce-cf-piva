@@ -4,8 +4,8 @@ Contributors: Madaritech
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9TZGG6437EUX6
 Tags: partita, iva, codice, fiscale, woocommerce, easy, italia
 Requires at least: 4.8
-Tested up to: 4.9.1
-Stable tag: 1.2.0
+Tested up to: 4.9.8
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Add the "Partita IVA" e "Codice Fiscale" fields in WooCommerce for the italian m
 
 == Description ==
 
-WC tested up to: 3.2.6
+WC tested up to: 3.4.5
 Requires at least: 3.1.2
 
 = Italiano =
@@ -82,6 +82,9 @@ This section describes how to install the plugin and get it working.
 
 
 == Changelog ==
+
+= 1.2.1 =
+* Removed word 'opzionale' because not needed
 
 = 1.2.0 =
 * Added checkbox to make compulsory the Company Name field
