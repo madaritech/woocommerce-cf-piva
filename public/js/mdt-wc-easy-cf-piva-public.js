@@ -6,6 +6,10 @@
 	 * should reside in this file.
 	 */
 
+    // Deleting the word "opzionale"
+    $('#billing_cfpiva_field').find("span").remove(".optional");
+    $('#billing_company_field').find("span").remove(".optional");
+
     $('#billing_cfpiva_field').addClass( "validate-required" );
     $('#billing_cfpiva_field').find("label").append( ' <abbr class="required" title="obbligatorio">*</abbr>' );
 
